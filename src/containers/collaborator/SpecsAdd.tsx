@@ -3,20 +3,26 @@ import { InputAdornment, MenuItem, TextField } from "@mui/material";
 import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
 import { DatePicker, TimePicker } from "@mui/x-date-pickers";
 
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+  adaptV4Theme,
+} from "@mui/material/styles";
 
-
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 
-
-const theme = createTheme(adaptV4Theme({
-  palette: {
-    primary: { main: "#1976d2" },
-  },
-}, ptBR));
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: { main: "#1976d2" },
+    },
+  })
+);
 
 const columns: GridColDef[] = [
   {

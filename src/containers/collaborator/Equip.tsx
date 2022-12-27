@@ -2,20 +2,27 @@ import React, { useState } from "react";
 import { MenuItem, TextField } from "@mui/material";
 import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
 import { ButtonBack } from "../../components/ButtonBack";
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+  adaptV4Theme,
+} from "@mui/material/styles";
+import "@mui/styles";
 
-
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 
-
-const theme = createTheme(adaptV4Theme({
-  palette: {
-    primary: { main: "#1976d2" },
-  },
-}, ptBR));
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: { main: "#1976d2" },
+    },
+  })
+);
 
 const frequencies = ["Fixo", "Móvel"];
 
@@ -118,82 +125,84 @@ export const Equip = () => {
     console.log(inputFields);
   };
 
-  return <>
-    <ButtonBack />
-    <div className="flex flex-col bg-slate-100 shadow-xl h-auto rounded-xl p-8">
-      <h1 className="text-base font-semibold mb-4 text-blue-600">
-        Adicionar Equipamento
-      </h1>
-      <form>
-        <div className="flex md:flex-row flex-col w-full justify-between gap-4">
-          <TextField
-            id="outlined-basic"
-            label="Patrimônio"
-            variant="outlined"
-            value={patrimony}
-            onChange={(event) => handlePatrimony(event)}
-            className="w-full"
-          />
-
-          <TextField
-            id="outlined-basic"
-            label="Equipamento"
-            variant="outlined"
-            value={name}
-            className="w-full"
-            onChange={(event) => handleName(event)}
-          />
-
-          <TextField
-            label="Fixo/Móvel"
-            variant="outlined"
-            value={disp}
-            onChange={(event) => handleDisp(event)}
-            className="w-full"
-            select
-          >
-            {frequencies.map((item) => (
-              <MenuItem key={item} value={item}>
-                {item}
-              </MenuItem>
-            ))}
-          </TextField>
-
-          {disp === "Fixo" ? (
-            <>
-              <TextField
-                id="outlined-basic"
-                label="Local"
-                variant="outlined"
-                value={local}
-                onChange={(event) => handleLocal(event)}
-                className="w-full"
-              />
-            </>
-          ) : (
-            <></>
-          )}
-
-          <span
-            onClick={handleSubmit}
-            className="flex bg-blue-600 text-white text-xl min-w-[55px] min-h-[55px] justify-center items-center rounded-md transition-all hover:bg-blue-800 cursor-pointer"
-          >
-            <i className="fa-solid fa-plus"></i>
-          </span>
-        </div>
-      </form>
-      <div className="w-full h-[300px] mt-8">
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <DataGrid
-              rows={inputFields}
-              columns={columns}
-              pageSize={7}
-              rowsPerPageOptions={[7]}
+  return (
+    <>
+      <ButtonBack />
+      <div className="flex flex-col bg-slate-100 shadow-xl h-auto rounded-xl p-8">
+        <h1 className="text-base font-semibold mb-4 text-blue-600">
+          Adicionar Equipamento
+        </h1>
+        <form>
+          <div className="flex md:flex-row flex-col w-full justify-between gap-4">
+            <TextField
+              id="outlined-basic"
+              label="Patrimônio"
+              variant="outlined"
+              value={patrimony}
+              onChange={(event) => handlePatrimony(event)}
+              className="w-full"
             />
-          </ThemeProvider>
-        </StyledEngineProvider>
+
+            <TextField
+              id="outlined-basic"
+              label="Equipamento"
+              variant="outlined"
+              value={name}
+              className="w-full"
+              onChange={(event) => handleName(event)}
+            />
+
+            <TextField
+              label="Fixo/Móvel"
+              variant="outlined"
+              value={disp}
+              onChange={(event) => handleDisp(event)}
+              className="w-full"
+              select
+            >
+              {frequencies.map((item) => (
+                <MenuItem key={item} value={item}>
+                  {item}
+                </MenuItem>
+              ))}
+            </TextField>
+
+            {disp === "Fixo" ? (
+              <>
+                <TextField
+                  id="outlined-basic"
+                  label="Local"
+                  variant="outlined"
+                  value={local}
+                  onChange={(event) => handleLocal(event)}
+                  className="w-full"
+                />
+              </>
+            ) : (
+              <></>
+            )}
+
+            <span
+              onClick={handleSubmit}
+              className="flex bg-blue-600 text-white text-xl min-w-[55px] min-h-[55px] justify-center items-center rounded-md transition-all hover:bg-blue-800 cursor-pointer"
+            >
+              <i className="fa-solid fa-plus"></i>
+            </span>
+          </div>
+        </form>
+        <div className="w-full h-[300px] mt-8">
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <DataGrid
+                rows={inputFields}
+                columns={columns}
+                pageSize={7}
+                rowsPerPageOptions={[7]}
+              />
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </div>
       </div>
-    </div>
-  </>;
+    </>
+  );
 };

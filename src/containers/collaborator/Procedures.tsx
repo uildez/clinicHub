@@ -3,24 +3,29 @@ import { useState } from "react";
 
 import { DataGrid, GridColDef, GridToolbar, ptBR } from "@mui/x-data-grid";
 import { ButtonBack } from "../../components/ButtonBack";
-import { useDemoData } from "@mui/x-data-grid-generator";
 
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+  adaptV4Theme,
+} from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { rowsInsurance } from "../../fakeData/DataInsurance";
 
-
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 
-
-const theme = createTheme(adaptV4Theme({
-  palette: {
-    primary: { main: "#1976d2" },
-  },
-}, ptBR));
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: { main: "#1976d2" },
+    },
+  })
+);
 
 const columnsInsurance: GridColDef[] = [
   {
@@ -80,35 +85,37 @@ const VISIBLE_FIELDS = [
 export const Procedures = () => {
   const [insurance, setInsurance] = useState<any[]>([]);
 
-  return <>
-    <ButtonBack />
+  return (
+    <>
+      <ButtonBack />
 
-    <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg mb-4">
-      <div className="flex w-full justify-between mb-4">
-        <Link
-          to="/portaldocolaborador/servicos/novo-servico"
-          className="py-2 px-4 bg-blue-600 hover:bg-blue-800 transition-all rounded-lg"
-        >
-          Novo Procedimento
-        </Link>
+      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg mb-4">
+        <div className="flex w-full justify-between mb-4">
+          <Link
+            to="/portaldocolaborador/servicos/novo-servico"
+            className="py-2 px-4 bg-blue-600 hover:bg-blue-800 transition-all rounded-lg"
+          >
+            Novo Procedimento
+          </Link>
+        </div>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <div className="h-[500px]">
+              <DataGrid
+                rows={rowsInsurance}
+                columns={columnsInsurance}
+                components={{ Toolbar: GridToolbar }}
+                componentsProps={{
+                  toolbar: {
+                    showQuickFilter: true,
+                    quickFilterProps: { debounceMs: 500 },
+                  },
+                }}
+              />
+            </div>
+          </ThemeProvider>
+        </StyledEngineProvider>
       </div>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <div className="h-[500px]">
-            <DataGrid
-              rows={rowsInsurance}
-              columns={columnsInsurance}
-              components={{ Toolbar: GridToolbar }}
-              componentsProps={{
-                toolbar: {
-                  showQuickFilter: true,
-                  quickFilterProps: { debounceMs: 500 },
-                },
-              }}
-            />
-          </div>
-        </ThemeProvider>
-      </StyledEngineProvider>
-    </div>
-  </>;
+    </>
+  );
 };

@@ -12,19 +12,23 @@ import {
 } from "../../../validations/NewBudget";
 
 // Material UI
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+  adaptV4Theme,
+} from "@mui/material/styles";
 import { DataGrid, ptBR } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { MenuItem, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 
-
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
-
 
 const style = {
   position: "absolute" as "absolute",
@@ -39,11 +43,13 @@ const style = {
   borderRadius: ".5rem",
 };
 
-const theme = createTheme(adaptV4Theme({
-  palette: {
-    primary: { main: "#1976d2" },
-  },
-}, ptBR));
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: { main: "#1976d2" },
+    },
+  })
+);
 
 const insuranceOptions = [
   "Convênio 1",
@@ -144,160 +150,162 @@ export const BudgetPacient = () => {
     // navigate("/portaldocolaborador");
   };
 
-  return <>
-    <div className="flex flex-col justify-between w-full p-8 bg-slate-100 shadow-xl rounded-lg text-gray-600 overflow-hidden">
-      <div className="flex w-full justify-between mb-4">
-        <button
-          onClick={handleOpen}
-          className="py-2 px-4 bg-blue-600 hover:bg-blue-800 text-white rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+  return (
+    <>
+      <div className="flex flex-col justify-between w-full p-8 bg-slate-100 shadow-xl rounded-lg text-gray-600 overflow-hidden">
+        <div className="flex w-full justify-between mb-4">
+          <button
+            onClick={handleOpen}
+            className="py-2 px-4 bg-blue-600 hover:bg-blue-800 text-white rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+          >
+            + Novo Orçamento
+          </button>
+        </div>
+
+        <div className="flex w-full justify-between mb-4">
+          <StyledEngineProvider injectFirst>
+            <ThemeProvider theme={theme}>
+              <div style={{ height: 400, width: "100%" }}>
+                <DataGrid rows={rowsBudget} columns={columnsBudget} />
+              </div>
+            </ThemeProvider>
+          </StyledEngineProvider>
+        </div>
+      </div>
+      <div>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
         >
-          + Novo Orçamento
-        </button>
-      </div>
+          <Box sx={style}>
+            <div className="flex w-full items-center justify-between mb-4">
+              <h3 className="text-lg text-blue-600 font-bold">
+                Novo Orçamento
+              </h3>
 
-      <div className="flex w-full justify-between mb-4">
-        <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <div style={{ height: 400, width: "100%" }}>
-              <DataGrid rows={rowsBudget} columns={columnsBudget} />
-            </div>
-          </ThemeProvider>
-        </StyledEngineProvider>
-      </div>
-    </div>
-    <div>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <div className="flex w-full items-center justify-between mb-4">
-            <h3 className="text-lg text-blue-600 font-bold">
-              Novo Orçamento
-            </h3>
-
-            <button onClick={handleClose}>
-              <i className="fa-solid fa-square-xmark text-blue-600 hover:text-blue-700 text-4xl hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"></i>
-            </button>
-          </div>
-          <form onSubmit={onSubmit(handleSubmit)}>
-            <div className="flex md:flex-row flex-col gap-4 w-full">
-              <TextField
-                {...register("descriptionBudget")}
-                label="Descrição*"
-                variant="outlined"
-                helperText={errors?.descriptionBudget?.message}
-                error={errors?.descriptionBudget ? true : false}
-                className="w-full"
-              />
-
-              <DatePicker
-                label="Data*"
-                renderInput={(params: any) => (
-                  <TextField
-                    {...params}
-                    variant="outlined"
-                    {...register("dateNewBudget")}
-                    helperText={errors?.dateNewBudget?.message}
-                    error={errors?.dateNewBudget ? true : false}
-                    className="w-full"
-                  />
-                )}
-                value={dateNewBudget}
-                onChange={(newValue: any) => {
-                  setDateNewBudget(newValue);
-                }}
-              />
-            </div>
-            <h3 className="text-lg text-blue-600 font-bold mt-8 mb-4">
-              Adicionar Tratamento
-            </h3>
-            <div className="grid md:grid-cols-3 grid-cols-1 gap-4 w-full">
-              <TextField
-                {...register("insurance")}
-                label="Plano*"
-                variant="outlined"
-                value={insurance}
-                onChange={handleInsurance}
-                helperText={errors?.insurance?.message}
-                error={errors?.insurance ? true : false}
-                className="w-full"
-                select
-              >
-                {insuranceOptions.map((item) => (
-                  <MenuItem key={item} value={item}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </TextField>
-
-              <TextField
-                {...register("procedure")}
-                label="Tratamento*"
-                variant="outlined"
-                value={procedure}
-                onChange={handleProcedure}
-                helperText={errors?.procedure?.message}
-                error={errors?.procedure ? true : false}
-                className="w-full"
-                select
-              >
-                {procedureOptions.map((item) => (
-                  <MenuItem key={item} value={item}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </TextField>
-
-              <TextField
-                {...register("price")}
-                label="Valor*"
-                variant="outlined"
-                helperText={errors?.price?.message}
-                error={errors?.price ? true : false}
-                className="w-full"
-              />
-
-              <TextField
-                {...register("professional")}
-                label="Especialidade*"
-                variant="outlined"
-                helperText={errors?.professional?.message}
-                error={errors?.professional ? true : false}
-                className="w-full"
-              />
-
-              <TextField
-                {...register("select")}
-                label="Dente/Região"
-                variant="outlined"
-                value={select}
-                onChange={handleSelect}
-                helperText={errors?.select?.message}
-                error={errors?.select ? true : false}
-                className="w-full"
-                select
-              >
-                {selectRegionOptions.map((item) => (
-                  <MenuItem key={item} value={item}>
-                    {item}
-                  </MenuItem>
-                ))}
-              </TextField>
-            </div>
-            <div className="flex w-full items-end justify-end">
-              <button
-                type="submit"
-                className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-              >
-                Salvar
+              <button onClick={handleClose}>
+                <i className="fa-solid fa-square-xmark text-blue-600 hover:text-blue-700 text-4xl hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"></i>
               </button>
             </div>
-          </form>
-        </Box>
-      </Modal>
-    </div>
-  </>;
+            <form onSubmit={onSubmit(handleSubmit)}>
+              <div className="flex md:flex-row flex-col gap-4 w-full">
+                <TextField
+                  {...register("descriptionBudget")}
+                  label="Descrição*"
+                  variant="outlined"
+                  helperText={errors?.descriptionBudget?.message}
+                  error={errors?.descriptionBudget ? true : false}
+                  className="w-full"
+                />
+
+                <DatePicker
+                  label="Data*"
+                  renderInput={(params: any) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      {...register("dateNewBudget")}
+                      helperText={errors?.dateNewBudget?.message}
+                      error={errors?.dateNewBudget ? true : false}
+                      className="w-full"
+                    />
+                  )}
+                  value={dateNewBudget}
+                  onChange={(newValue: any) => {
+                    setDateNewBudget(newValue);
+                  }}
+                />
+              </div>
+              <h3 className="text-lg text-blue-600 font-bold mt-8 mb-4">
+                Adicionar Tratamento
+              </h3>
+              <div className="grid md:grid-cols-3 grid-cols-1 gap-4 w-full">
+                <TextField
+                  {...register("insurance")}
+                  label="Plano*"
+                  variant="outlined"
+                  value={insurance}
+                  onChange={handleInsurance}
+                  helperText={errors?.insurance?.message}
+                  error={errors?.insurance ? true : false}
+                  className="w-full"
+                  select
+                >
+                  {insuranceOptions.map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                <TextField
+                  {...register("procedure")}
+                  label="Tratamento*"
+                  variant="outlined"
+                  value={procedure}
+                  onChange={handleProcedure}
+                  helperText={errors?.procedure?.message}
+                  error={errors?.procedure ? true : false}
+                  className="w-full"
+                  select
+                >
+                  {procedureOptions.map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </TextField>
+
+                <TextField
+                  {...register("price")}
+                  label="Valor*"
+                  variant="outlined"
+                  helperText={errors?.price?.message}
+                  error={errors?.price ? true : false}
+                  className="w-full"
+                />
+
+                <TextField
+                  {...register("professional")}
+                  label="Especialidade*"
+                  variant="outlined"
+                  helperText={errors?.professional?.message}
+                  error={errors?.professional ? true : false}
+                  className="w-full"
+                />
+
+                <TextField
+                  {...register("select")}
+                  label="Dente/Região"
+                  variant="outlined"
+                  value={select}
+                  onChange={handleSelect}
+                  helperText={errors?.select?.message}
+                  error={errors?.select ? true : false}
+                  className="w-full"
+                  select
+                >
+                  {selectRegionOptions.map((item) => (
+                    <MenuItem key={item} value={item}>
+                      {item}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </div>
+              <div className="flex w-full items-end justify-end">
+                <button
+                  type="submit"
+                  className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                >
+                  Salvar
+                </button>
+              </div>
+            </form>
+          </Box>
+        </Modal>
+      </div>
+    </>
+  );
 };

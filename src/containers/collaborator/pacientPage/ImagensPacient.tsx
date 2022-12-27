@@ -8,7 +8,7 @@ export const ImagensPacients = () => {
     const selectedFilesArray = Array.from(selectedFiles);
 
     const imagesArray = selectedFilesArray.map((file) => {
-      return URL.createObjectURL(file);
+      return URL.createObjectURL(file as Blob | MediaSource);
     });
 
     setSelectedImages((previousImage) => previousImage.concat(imagesArray));

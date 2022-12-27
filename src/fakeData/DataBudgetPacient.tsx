@@ -6,8 +6,12 @@ import {
   GridRowsProp,
   GridActionsCellItem,
 } from "@mui/x-data-grid-pro";
+interface IMyProps {
+  icon: Element;
+  label: string;
+}
 
-export const columnsBudget: GridColumns = [
+export const columnsBudget: GridColumns<IMyProps> = [
   {
     field: "dueDate",
     headerName: "Data",
@@ -70,8 +74,8 @@ export const columnsBudget: GridColumns = [
     align: "left",
     headerAlign: "left",
     getActions: () => [
-      <GridActionsCellItem icon={<EditIcon />} label="Editar" />,
-      <GridActionsCellItem icon={<DeleteIcon />} label="Deletar" />,
+      // <GridActionsCellItem icon={<EditIcon />} label="Editar" />,
+      // <GridActionsCellItem icon={<DeleteIcon />} label="Deletar" />,
     ],
   },
 ];

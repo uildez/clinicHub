@@ -193,8 +193,8 @@ export const NewStorage = () => {
   const [type, setType] = useState("");
   const [category, setCategory] = useState("");
   const [manufacturer, setManufacturer] = useState("");
-  const [lote, setLote] = useState([]);
-  const [validity, setValidity] = useState([]);
+  const [lote, setLote] = useState("");
+  const [validity, setValidity] = useState("");
   const [unit, setUnit] = useState("");
   const [location, setLocation] = useState("");
   const [cd, setCd] = useState("");

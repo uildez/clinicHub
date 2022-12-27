@@ -12,42 +12,49 @@ import {
 } from "../../../validations/NewAnamnese";
 
 // Material UI
-import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
+import {
+  createTheme,
+  ThemeProvider,
+  Theme,
+  StyledEngineProvider,
+  adaptV4Theme,
+  styled,
+} from "@mui/material/styles";
 import { DataGrid, ptBR } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { MenuItem, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 
-
-declare module '@mui/styles/defaultTheme' {
+declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
 
+// const Root = styled("div")({
+//   position: "absolute" as "absolute",
+//   display: "flex",
+//   flexDirection: "column",
+//   justifyContent: "justify-between",
+//   top: "50%",
+//   left: "50%",
+//   transform: "translate(-50%, -50%)",
+//   width: ["90%", "70%"],
+//   minHeight: "500px",
+//   bgcolor: "background.paper",
+//   border: "0px solid #000",
+//   boxShadow: 24,
+//   p: 4,
+//   borderRadius: ".5rem",
+// });
 
-const style = {
-  position: "absolute" as "absolute",
-  display: "flex",
-  flexDirection: "column",
-  justifyContent: "justify-between",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: ["90%", "70%"],
-  minHeight: "500px",
-  bgcolor: "background.paper",
-  border: "0px solid #000",
-  boxShadow: 24,
-  p: 4,
-  borderRadius: ".5rem",
-};
-
-const theme = createTheme(adaptV4Theme({
-  palette: {
-    primary: { main: "#1976d2" },
-  },
-}, ptBR));
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary: { main: "#1976d2" },
+    },
+  })
+);
 
 const modelsOptions = [
   "Anamnese",
@@ -131,7 +138,24 @@ export const Attendance = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Box sx={style}>
+          <Box
+            sx={{
+              position: "absolute" as "absolute",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "justify-between",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: ["90%", "70%"],
+              minHeight: "500px",
+              bgcolor: "background.paper",
+              border: "0px solid #000",
+              boxShadow: 24,
+              p: 4,
+              borderRadius: ".5rem",
+            }}
+          >
             <div className="flex w-full items-center justify-between mb-4">
               <h3 className="text-lg text-blue-600 font-bold">
                 Novo Atendimento

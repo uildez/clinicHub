@@ -4,9 +4,9 @@ export const DocumentsPacient = () => {
   const fileInput = useRef(null);
   const [onFileSelect, setOnFileSelect] = useState();
 
-  const handleFileInput = (e: { target: { files: any[] } }) => {
+  const handleFileInput = (event: { target: { files: any[] } }) => {
     // handle validations
-    setOnFileSelect(e.target.files[0]);
+    setOnFileSelect(event.target.files[0]);
   };
 
   return (
@@ -20,7 +20,7 @@ export const DocumentsPacient = () => {
         <input
           id="files"
           type="file"
-          onChange={handleFileInput}
+          // onChange={handleFileInput}
           className="hidden"
           multiple
           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -41,7 +41,7 @@ export const DocumentsPacient = () => {
         <input
           id="files"
           type="file"
-          onChange={handleFileInput}
+          // onChange={handleFileInput}
           className="hidden"
           multiple
           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -62,7 +62,7 @@ export const DocumentsPacient = () => {
         <input
           id="files"
           type="file"
-          onChange={handleFileInput}
+          // onChange={handleFileInput}
           className="hidden"
           multiple
           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
@@ -83,7 +83,7 @@ export const DocumentsPacient = () => {
         <input
           id="files"
           type="file"
-          onChange={handleFileInput}
+          // onChange={handleFileInput}
           className="hidden"
           multiple
           accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
