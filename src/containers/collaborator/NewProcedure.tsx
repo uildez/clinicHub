@@ -23,7 +23,7 @@ import {
   FormControlLabel,
   FormGroup,
   Switch,
-} from "@material-ui/core";
+} from "@mui/material";
 import {
   FormInputsNewProcedure,
   schemaNewProcedure,

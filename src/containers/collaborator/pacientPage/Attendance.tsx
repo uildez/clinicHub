@@ -12,12 +12,19 @@ import {
 } from "../../../validations/NewAnamnese";
 
 // Material UI
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
 import { DataGrid, ptBR } from "@mui/x-data-grid";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { MenuItem, TextField } from "@material-ui/core";
+import { MenuItem, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 const style = {
   position: "absolute" as "absolute",
@@ -36,14 +43,11 @@ const style = {
   borderRadius: ".5rem",
 };
 
-const theme = createTheme(
-  {
-    palette: {
-      primary: { main: "#1976d2" },
-    },
+const theme = createTheme(adaptV4Theme({
+  palette: {
+    primary: { main: "#1976d2" },
   },
-  ptBR
-);
+}, ptBR));
 
 const modelsOptions = [
   "Anamnese",

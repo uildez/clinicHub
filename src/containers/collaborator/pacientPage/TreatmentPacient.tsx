@@ -11,8 +11,8 @@ import {
 } from "../../../validations/NewBudget";
 
 // Material UI
-import { Divider } from "@material-ui/core";
-import { MenuItem, TextField } from "@material-ui/core";
+import { Divider } from "@mui/material";
+import { MenuItem, TextField } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
   columnsTreatment,

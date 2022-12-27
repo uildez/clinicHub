@@ -22,7 +22,7 @@ import {
   Divider,
   FormControlLabel,
   InputAdornment,
-} from "@material-ui/core";
+} from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 
 //Types Selected's

@@ -3,16 +3,20 @@ import { MenuItem, TextField } from "@mui/material";
 import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
 import { DatePicker } from "@mui/x-date-pickers";
 
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { createTheme, ThemeProvider, Theme, StyledEngineProvider, adaptV4Theme } from "@mui/material/styles";
 
-const theme = createTheme(
-  {
-    palette: {
-      primary: { main: "#1976d2" },
-    },
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
+
+const theme = createTheme(adaptV4Theme({
+  palette: {
+    primary: { main: "#1976d2" },
   },
-  ptBR
-);
+}, ptBR));
 
 const insuranceOptions = [
   "Convênio 1",
@@ -225,14 +229,16 @@ export const InsurancePacient = () => {
         </div>
       </form>
       <div className="w-full h-[300px] mt-8">
-        <ThemeProvider theme={theme}>
-          <DataGrid
-            rows={inputFields}
-            columns={columns}
-            pageSize={7}
-            rowsPerPageOptions={[7]}
-          />
-        </ThemeProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <DataGrid
+              rows={inputFields}
+              columns={columns}
+              pageSize={7}
+              rowsPerPageOptions={[7]}
+            />
+          </ThemeProvider>
+        </StyledEngineProvider>
       </div>
     </div>
   );

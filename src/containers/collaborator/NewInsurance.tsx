@@ -21,7 +21,7 @@ import {
   FormInputsNewInsurance,
   schemaNewInsurance,
 } from "../../validations/NewInsurance";
-import { FormControlLabel, InputAdornment, Switch } from "@material-ui/core";
+import { FormControlLabel, InputAdornment, Switch } from "@mui/material";
 import { AgreementContracts } from "../../components/AgreementContracts";
 import { PlansInsurance } from "../../components/PlansInsurance";
 

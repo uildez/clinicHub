@@ -77,7 +77,7 @@ export const ImagensPacients = () => {
 // import { ptBR } from "@mui/x-data-grid";
 // import Box from "@mui/material/Box";
 // import Modal from "@mui/material/Modal";
-// import { TextField } from "@material-ui/core";
+// import { TextField } from "@mui/material";
 
 // const style = {
 //   position: "absolute" as "absolute",
