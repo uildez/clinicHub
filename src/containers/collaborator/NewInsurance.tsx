@@ -7,10 +7,6 @@ import { ButtonBack } from "../../components/ButtonBack";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-//Quill JS
-import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
-
 //Material-ui
 import { MenuItem, TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -129,8 +125,6 @@ const sizeTableOptions = [
 
 export const NewInsurance = () => {
   const navigate = useNavigate();
-  const { quill, quillRef } = useQuill();
-
   const [checked, setChecked] = React.useState(true);
 
   const [selectedFile, setSelectedFile] = useState();
@@ -813,7 +807,7 @@ export const NewInsurance = () => {
             className="w-full md:mb-12 mb-28 rounded-lg"
             style={{ height: 150 }}
           >
-            <div ref={quillRef} />
+            <h1>Rich Text</h1>
           </div>
 
           <div className="flex lg:flex-row flex-col w-full justify-end">

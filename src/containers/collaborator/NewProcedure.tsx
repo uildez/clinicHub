@@ -7,10 +7,6 @@ import { ButtonBack } from "../../components/ButtonBack";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-//Quill JS
-import { useQuill } from "react-quilljs";
-import "quill/dist/quill.snow.css";
-
 //Material-ui
 import { MenuItem, TextField } from "@mui/material";
 import Autocomplete from "@mui/material/Autocomplete";
@@ -88,7 +84,6 @@ const limitEquipamentsOptions = [
 
 export const NewProcedure = () => {
   const navigate = useNavigate();
-  const { quill, quillRef } = useQuill();
 
   const [checked, setChecked] = React.useState(true);
 
@@ -522,7 +517,7 @@ export const NewProcedure = () => {
             Preparo
           </h3>
           <div className="w-full mb-20 rounded-lg" style={{ height: 150 }}>
-            <div ref={quillRef} />
+            <h1>Rich Text</h1>
           </div>
 
           <Divider variant="middle" />
