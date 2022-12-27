@@ -6,12 +6,8 @@ import {
   GridRowsProp,
   GridActionsCellItem,
 } from "@mui/x-data-grid-pro";
-interface IMyProps {
-  icon: Element;
-  label: string;
-}
 
-export const columnsBudget: GridColumns<IMyProps> = [
+export const columnsBudget: GridColumns = [
   {
     field: "dueDate",
     headerName: "Data",
