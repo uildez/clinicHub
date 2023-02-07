@@ -2,7 +2,7 @@ import { ButtonBack } from "../../components/ButtonBack";
 
 import { DataGrid } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
-import { columns, rows } from "../../fakeData/DataPacients";
+import { columns, rows } from "../../_fakeData/DataPacients";
 
 export const Pacients = () => {
   return (

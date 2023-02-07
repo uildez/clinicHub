@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // Import's
-import { columnsBudget, rowsBudget } from "../../../fakeData/DataBudgetPacient";
+import { columnsBudget, rowsBudget } from "../../../_fakeData/DataBudgetPacient";
 import {
   FormInputsNewAnamnese,
   schemaNewAnamnese,
@@ -28,7 +28,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
+  interface DefaultTheme extends Theme { }
 }
 
 // const Root = styled("div")({

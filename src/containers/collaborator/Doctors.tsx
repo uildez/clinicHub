@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import { ButtonBack } from "../../components/ButtonBack";
-import { BarChart } from "../charts/BarChart";
+import { BarChart } from "../../components/charts/BarChart";
+import { LineChart } from "../../components/charts/LineChart";
 
 import faker from "faker";
-import { LineChart } from "../charts/LineChart";
-import { Link } from "react-router-dom";
 
 // Data Line Chart
 export const optionsLine = {

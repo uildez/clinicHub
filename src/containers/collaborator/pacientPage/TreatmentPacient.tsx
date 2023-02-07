@@ -17,7 +17,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import {
   columnsTreatment,
   rowsTreatment,
-} from "../../../fakeData/DataTreatment";
+} from "../../../_fakeData/DataTreatment";
 
 const insuranceOptions = [
   "Convênio 1",

@@ -1,14 +1,17 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Appointment } from "../containers/schedule/Appointment";
-import { Confirm } from "../containers/schedule/Confirm";
-import { Menu } from "../containers/schedule/Menu";
-import { Navbar } from "../containers/schedule/Navbar";
-import { OptionsPages } from "../containers/schedule/OptionsPages";
-import { Register } from "../containers/schedule/Register";
-import { SignIn } from "../containers/schedule/SignIn";
+
+import { ClientNavbar } from "../containers/client/ClientNavbar";
+import { Menu } from "../components/client/Menu";
+
+import { Appointment } from "../containers/client/Appointment";
+import { Confirm } from "../containers/client/Confirm";
+import { OptionsPages } from "../containers/client/OptionsPages";
+import { Register } from "../containers/client/Register";
+import { SignIn } from "../containers/client/SignIn";
+import { Exams } from "../containers/client/Exams";
+
 import { motion } from "framer-motion";
-import { Exams } from "../containers/schedule/Exams";
 
 export const Schedule = () => {
   return (
@@ -21,7 +24,7 @@ export const Schedule = () => {
       <div className="bg-blue-200">
         <Menu />
         <div className="flex flex-col bg-[#ddd6fe] lg:h-full h-auto min-h-screen w-screen lg:justify-between lg:pl-28 lg:py-6 lg:pr-12 p-8 pt-20">
-          <Navbar />
+          <ClientNavbar />
           <Routes>
             <Route path="/" element={<OptionsPages />} />
             <Route path="consulta" element={<Appointment />} />

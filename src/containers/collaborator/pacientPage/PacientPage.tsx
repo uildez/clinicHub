@@ -3,7 +3,7 @@ import { ButtonBack } from "../../../components/ButtonBack";
 
 import { AboutPacient } from "./AboutPacient";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { LinkMenuPacientPage } from "../../../components/collaborator/LinkMenuPacientPage";
+import { LinkMenuPacientPage } from "../../../components/employee/LinkMenuPacientPage";
 import { BudgetPacient } from "./BudgetPacient";
 import { Attendance } from "./Attendance";
 import { TreatmentPacient } from "./TreatmentPacient";

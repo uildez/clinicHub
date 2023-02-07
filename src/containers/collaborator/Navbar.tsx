@@ -30,7 +30,7 @@ export const Navbar = () => {
 
       <div className="flex gap-6 items-center">
         <span className="text-sm text-blue-600">
-          Bem vindo ao Rabi, Nome do Colaborador
+          Bem vindo ao ClinicHub, Nome do Colaborador
         </span>
         <Link to="meu-perfil">
           <i className="fa-solid fa-gears text-2xl text-blue-600 hover:text-blue-800 transition-all"></i>

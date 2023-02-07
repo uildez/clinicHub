@@ -7,12 +7,12 @@ import {
   adaptV4Theme,
 } from "@mui/material/styles";
 import { DataGrid, ptBR } from "@mui/x-data-grid";
-import { columnsStore, rowsStore } from "../../fakeData/DataStore";
+import { columnsStore, rowsStore } from "../../_fakeData/DataStore";
 import { Link } from "react-router-dom";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
+  interface DefaultTheme extends Theme { }
 }
 
 const theme = createTheme(

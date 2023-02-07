@@ -27,3 +27,27 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #004cff #ffffff;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #ffffff;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #004cff;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+    padding-left: 20px
+  }

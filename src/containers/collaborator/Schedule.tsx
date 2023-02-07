@@ -4,13 +4,13 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 // Import's
 import { ButtonBack } from "../../components/ButtonBack";
-import { CalendarModel } from "../../components/collaborator/CalendarModel";
-import { columns, rows } from "../../fakeData/DataPacients";
+import { CalendarModel } from "../../components/employee/CalendarModel";
+import { columns, rows } from "../../_fakeData/DataPacients";
 
 //Material-UI
 import { DataGrid } from "@mui/x-data-grid";
 import { Box, MenuItem, TextField } from "@mui/material";
-import { filterOptions } from "../../fakeData/DataCalendar";
+import { filterOptions } from "../../_fakeData/DataCalendar";
 
 interface EventProps {
   title: string;

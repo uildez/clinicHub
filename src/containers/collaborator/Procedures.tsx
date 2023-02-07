@@ -12,11 +12,11 @@ import {
   adaptV4Theme,
 } from "@mui/material/styles";
 import { Link } from "react-router-dom";
-import { rowsInsurance } from "../../fakeData/DataInsurance";
+import { rowsInsurance } from "../../_fakeData/DataInsurance";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
+  interface DefaultTheme extends Theme { }
 }
 
 const theme = createTheme(

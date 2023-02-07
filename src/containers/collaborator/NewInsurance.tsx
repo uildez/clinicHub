@@ -18,7 +18,7 @@ import {
   schemaNewInsurance,
 } from "../../validations/NewInsurance";
 import { FormControlLabel, InputAdornment, Switch } from "@mui/material";
-import { AgreementContracts } from "../../components/AgreementContracts";
+import { AgreementContracts } from "../../components/employee/AgreementContracts";
 import { PlansInsurance } from "../../components/PlansInsurance";
 
 //Types Selected's

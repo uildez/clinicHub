@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   columnsDebitPacient,
   rowsDebitPacient,
-} from "../../../fakeData/DataDebitPacient";
+} from "../../../_fakeData/DataDebitPacient";
 import {
   FormInputsNewDebit,
   schemaNewDebit,
@@ -30,7 +30,7 @@ import { DatePicker } from "@mui/x-date-pickers";
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
+  interface DefaultTheme extends Theme { }
 }
 
 const style = {

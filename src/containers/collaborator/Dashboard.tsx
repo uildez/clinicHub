@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { Menu } from "./Menu";
+import { Menu } from "../../components/employee/Menu";
 import { Navbar } from "./Navbar";
 import { motion } from "framer-motion";
 import { Employees } from "./Employees";
-import { MenuMobile } from "./MenuMobile";
+import { MenuMobile } from "../../components/employee/MenuMobile";
 import { Pacients } from "./Pacients";
 import { Insurance } from "./Insurance";
 import { Storage } from "./Storage";
