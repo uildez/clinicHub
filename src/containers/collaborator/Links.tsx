@@ -1,5 +1,5 @@
 import React from "react";
-import { LinkMenu } from "../../components/collaborator/LinkMenu";
+import { LinkMenu } from "../../components/employee/LinkMenu";
 
 export const Links = ({ toggleMenu }: any) => {
   return (
