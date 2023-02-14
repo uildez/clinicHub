@@ -64,9 +64,15 @@ export const Login = () => {
   });
 
   const handleSubmit = (data: any) => {
-    console.log("Texto usuário", data);
+    axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', data).then(response => {
+      if (response.status === 200) {
+        navigate("/portaldocolaborador/", { replace: true });
+      }
+    })
+  };
 
-    axios.post('http://localhost:3333/auth/authenticate', data).then(response => {
+  const handleSubmitDoctor = (data: any) => {
+    axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', data).then(response => {
       if (response.status === 200) {
         navigate("/portaldocolaborador/", { replace: true });
       }
