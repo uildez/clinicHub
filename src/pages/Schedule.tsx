@@ -12,6 +12,7 @@ import { SignIn } from "../containers/client/SignIn";
 import { Exams } from "../containers/client/Exams";
 
 import { motion } from "framer-motion";
+import { PrivateRouteClient } from "../routes/PrivateRouteClient";
 
 export const Schedule = () => {
   return (
@@ -26,12 +27,29 @@ export const Schedule = () => {
         <div className="flex flex-col bg-[#ddd6fe] lg:h-full h-auto min-h-screen w-screen lg:justify-between lg:pl-28 lg:py-6 lg:pr-12 p-8 pt-20">
           <ClientNavbar />
           <Routes>
-            <Route path="/" element={<OptionsPages />} />
-            <Route path="consulta" element={<Appointment />} />
-            <Route path="confirmacao" element={<Confirm />} />
-            <Route path="exames" element={<Exams />} />
+            <Route path="/" element={
+              <PrivateRouteClient>
+                <OptionsPages />
+              </PrivateRouteClient>
+            } />
             <Route path="entrar" element={<SignIn />} />
             <Route path="cadastro" element={<Register />} />
+            <Route path="consulta" element={
+              <PrivateRouteClient>
+                <Appointment />
+              </PrivateRouteClient>
+            }
+            />
+            <Route path="confirmacao" element={
+              <PrivateRouteClient>
+                <Confirm />
+              </PrivateRouteClient>
+            } />
+            <Route path="exames" element={
+              <PrivateRouteClient>
+                <Exams />
+              </PrivateRouteClient>
+            } />
           </Routes>
         </div>
       </div>

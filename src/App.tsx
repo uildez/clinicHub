@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, RouteProps, RouterProps, Routes, redirect, RoutesProps } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 
 import { Home } from "./pages/Home";
@@ -14,6 +14,7 @@ import bgLocale from "date-fns/locale/pt-BR";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { ptBR } from "@mui/x-data-grid";
+import { PrivateRoute } from "./routes/PrivateRoute";
 
 const theme = createTheme(
   {
@@ -37,7 +38,16 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/portaldopaciente/*" element={<Schedule />} />
               <Route path="portaldocolaborador/login" element={<Login />} />
-              <Route path="/portaldocolaborador/*" element={<Dashboard />} />
+              <Route path="/portaldocolaborador/*" element={
+                // <PrivateRoute >
+                <Dashboard />
+                // </PrivateRoute> 
+              } />
+              <Route path="/portaldocolaborador/teste" element={
+                <PrivateRoute >
+                  <h1>TEST</h1>
+                </PrivateRoute>
+              } />
             </Routes>
           </BrowserRouter>
         </AnimatePresence>

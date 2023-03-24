@@ -10,21 +10,24 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 //Material-ui
 import { TextField } from "@mui/material";
-import { AdminPanelSettings, AttachMoney, LocalHospital, SupervisedUserCircle } from '@mui/icons-material';
+import { AdminPanelSettings, AttachMoney, LocalHospital, Refresh, SupervisedUserCircle } from '@mui/icons-material';
 
 // Yup
 import * as yup from "yup";
 
-import { useQuery } from "react-query"
-
 //Assets
 import Logo from "../../_assets/images/logo/logo-blue.png";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { loginUser } from "../../redux/user/actions";
+import { authLogin } from "../../redux/fetchActions";
+import { RootState } from "../../redux/root-reducer";
+
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface IFormInputs {
   email: string;
   password: string;
-  unit: string;
 }
 
 const schema = yup
@@ -37,15 +40,14 @@ const schema = yup
   })
   .required();
 
-type Users = {
-  name: string,
-  email: string,
-  type: string,
-}
 
 export const Login = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(0);
   const navigate = useNavigate();
+
+  const { } = useSelector((rootReducer: RootState) => rootReducer.auth)
+  const dispatch = useDispatch()
 
   function openModal() {
     setIsOpen(true);
@@ -64,6 +66,8 @@ export const Login = () => {
   });
 
   const handleSubmit = (data: any) => {
+    // dispatch(authLogin(data))
+    dispatch(loginUser({ email: data.email }))
     axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', data).then(response => {
       if (response.status === 200) {
         navigate("/portaldocolaborador/", { replace: true });
@@ -72,56 +76,68 @@ export const Login = () => {
   };
 
   const handleSubmitAdmin = () => {
+    setIsLoading(1)
     axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
-      email: "adminregister@gmail.com",
+      email: "admregistration@gmail.com",
       password: "admregister2@"
     }).then(response => {
       if (response.status === 200) {
+        dispatch(loginUser({
+          email: "adminregister@gmail.com",
+        }))
         navigate("/portaldocolaborador/", { replace: true });
       }
     })
+    setIsLoading(0)
   };
 
   const handleSubmitDoctor = () => {
+    setIsLoading(2)
     axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
       email: "doctorregister@gmail.com",
       password: "doctorregister2@"
     }).then(response => {
       if (response.status === 200) {
+        dispatch(loginUser({
+          email: "doctorregister@gmail.com",
+        }))
         navigate("/portaldocolaborador/", { replace: true });
       }
     })
+    setIsLoading(0)
   };
 
   const handleSubmitAttendance = () => {
+    setIsLoading(3)
     axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
       email: "attendanceregister@gmail.com",
       password: "attendanceregister2@"
     }).then(response => {
       if (response.status === 200) {
+        dispatch(loginUser({
+          email: "attendanceregister@gmail.com",
+        }))
         navigate("/portaldocolaborador/", { replace: true });
       }
     })
+    setIsLoading(0)
   };
 
   const handleSubmitFinance = () => {
+    setIsLoading(4)
     axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
       email: "financeregister@gmail.com",
       password: "financeregister2@"
     }).then(response => {
       if (response.status === 200) {
+        dispatch(loginUser({
+          email: "financeregister@gmail.com",
+        }))
         navigate("/portaldocolaborador/", { replace: true });
       }
     })
+    setIsLoading(0)
   };
-
-  // const { data, isFetching } = useQuery<Users[]>('user', async () => {
-  //   const response = await axios.post('http://localhost:3333/auth/authenticate')
-
-  //   return response.data
-  // }, {
-  //   refetchOnWindowFocus: false
-  // })
 
   return (
     <>
@@ -193,6 +209,7 @@ export const Login = () => {
         </div>
       </div>
       <Modal
+        ariaHideApp={false}
         isOpen={modalIsOpen}
         className="relative top-[50%] translate-y-[-50%] translate-x-[12%] z-50 w-5/6 h-auto bg-slate-200 px-8 py-4 rounded-xl text-blue-600 shadow-2xl"
       >
@@ -204,48 +221,89 @@ export const Login = () => {
           ></i>
         </div>
         <div className="flex lg:flex-row flex-col max-h-[500px] scroll-pr-4 lg:overflow-hidden overflow-y-scroll items-center justify-between gap-4 mt-8">
-          <div onClick={handleSubmitAdmin} className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
+          <div className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
             <div className="flex items-center gap-2">
               <AdminPanelSettings fontSize="large" />
               <h2 className="text-lg font-bold">Demo admin</h2>
             </div>
             <p className="line-clamp-3 overflow-hidden">Usuário com acesso total a todas as telas e transições financeiras entre outros.</p>
-            <button
-              className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-            >Login como Admin</button>
+            {isLoading === 1 ?
+              <button
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                <AiOutlineLoading3Quarters className="animate-spin" />
+              </button> :
+              <button
+                onClick={handleSubmitAdmin}
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                Login como Admin
+              </button>
+            }
           </div>
 
-          <div onClick={handleSubmitAttendance} className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
-            <div className="flex items-center gap-2">
-              <SupervisedUserCircle fontSize="large" />
-              <h2 className="text-lg font-bold">Demo Recepção</h2>
-            </div>
-            <p className="line-clamp-3 overflow-hidden">Usuário com acesso a restrito a pacientes e grade de atendimentos...</p>
-            <button
-              className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-            >Login como Recepção</button>
-          </div>
-
-          <div onClick={handleSubmitDoctor} className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
+          <div className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
             <div className="flex items-center gap-2">
               <LocalHospital fontSize="large" />
               <h2 className="text-lg font-bold">Demo Médico</h2>
             </div>
             <p className="line-clamp-3 overflow-hidden">Usuário com acesso restrito a pacientes e seus atendimentos.</p>
-            <button
-              className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-            >Login como Médico</button>
+            {isLoading === 2 ?
+              <button
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                <AiOutlineLoading3Quarters className="animate-spin" />
+              </button> :
+              <button
+                onClick={handleSubmitDoctor}
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                Login como Médico
+              </button>
+            }
           </div>
 
-          <div onClick={handleSubmitFinance} className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
+          <div className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
+            <div className="flex items-center gap-2">
+              <SupervisedUserCircle fontSize="large" />
+              <h2 className="text-lg font-bold">Demo Recepção</h2>
+            </div>
+            <p className="line-clamp-3 overflow-hidden">Usuário com acesso a restrito a pacientes e grade de atendimentos...</p>
+            {isLoading === 3 ?
+              <button
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                <AiOutlineLoading3Quarters className="animate-spin" />
+              </button> :
+              <button
+                onClick={handleSubmitAttendance}
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                Login como Recepção
+              </button>
+            }
+          </div>
+
+
+          <div className="flex flex-col items-center w-full h-full gap-2 p-4 bg-slate-300 rounded-xl">
             <div className="flex items-center gap-2">
               <AttachMoney fontSize="large" />
               <h2 className="text-lg font-bold">Demo Financeiro</h2>
             </div>
             <p className="line-clamp-3 overflow-hidden">Usuário com acesso restrito a financeiro e funcionários.</p>
-            <button
-              className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-            >Login como Título</button>
+            {isLoading === 4 ?
+              <button
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                <AiOutlineLoading3Quarters className="animate-spin" />
+              </button> :
+              <button
+                onClick={handleSubmitFinance}
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+              >
+                Login como Financeiro
+              </button>
+            }
           </div>
         </div>
 

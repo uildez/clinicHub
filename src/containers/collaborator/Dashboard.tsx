@@ -19,7 +19,13 @@ import { NewProcedure } from "./NewProcedure";
 import { NewStorage } from "./NewStorage";
 import { Config } from "./Config";
 
+import { useSelector } from "react-redux/es/exports";
+// import { State } from "../../redux/root-reducer";
+
 export const Dashboard = () => {
+  // const { currentUser } = useSelector((rootReducer: State) => rootReducer.user)
+
+  // console.log({ currentUser })
   return (
     <motion.div
       initial={{ opacity: 0 }}

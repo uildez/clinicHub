@@ -1,7 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux/es/exports";
+// import { State } from "../../redux/root-reducer";
 
 export const Navbar = () => {
+  // const { currentUser } = useSelector((rootReducer: State) => rootReducer.user)
+
   return (
     <div className="lg:flex justify-between items-center ml-12 hidden">
       <form>
@@ -30,7 +34,8 @@ export const Navbar = () => {
 
       <div className="flex gap-6 items-center">
         <span className="text-sm text-blue-600">
-          Bem vindo ao ClinicHub, Nome do Colaborador
+          Bem vindo ao ClinicHub
+          {/* Bem vindo ao ClinicHub, {currentUser.user} */}
         </span>
         <Link to="meu-perfil">
           <i className="fa-solid fa-gears text-2xl text-blue-600 hover:text-blue-800 transition-all"></i>
