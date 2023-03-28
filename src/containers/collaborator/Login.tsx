@@ -152,19 +152,19 @@ export const Login = () => {
                   <label htmlFor="subscribeNews"> Lembrar meu acesso </label>
                 </div>
 
-                {/* {isLoading === 5 ?
+                {isLoading === 5 ?
                   <button
                     className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
                   >
                     <AiOutlineLoading3Quarters className="animate-spin" />
-                  </button> : */}
-                <button
-                  onClick={handleSubmitAdmin}
-                  className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-                >
-                  Acessar
-                </button>
-                {/* } */}
+                  </button> :
+                  <button
+                    onClick={handleSubmitAdmin}
+                    className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                  >
+                    Acessar
+                  </button>
+                }
 
               </form>
               <button
