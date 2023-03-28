@@ -10,20 +10,17 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 //Material-ui
 import { TextField } from "@mui/material";
-import { AdminPanelSettings, AttachMoney, LocalHospital, Refresh, SupervisedUserCircle } from '@mui/icons-material';
+import { AdminPanelSettings, AttachMoney, LocalHospital, SupervisedUserCircle } from '@mui/icons-material';
 
 // Yup
 import * as yup from "yup";
 
 //Assets
 import Logo from "../../_assets/images/logo/logo-blue.png";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux/es/exports";
-import { loginUser } from "../../redux/user/actions";
-import { authLogin } from "../../redux/fetchActions";
-import { RootState } from "../../redux/root-reducer";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { login } from "../../features/auth/authSlice";
+import { useAppDispatch } from "../../features/hooks/hooks";
 
 interface IFormInputs {
   email: string;
@@ -46,8 +43,7 @@ export const Login = () => {
   const [isLoading, setIsLoading] = useState(0);
   const navigate = useNavigate();
 
-  const { } = useSelector((rootReducer: RootState) => rootReducer.auth)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
 
   function openModal() {
     setIsOpen(true);
@@ -65,78 +61,44 @@ export const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const handleSubmit = (data: any) => {
-    // dispatch(authLogin(data))
-    dispatch(loginUser({ email: data.email }))
-    axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', data).then(response => {
-      if (response.status === 200) {
-        navigate("/portaldocolaborador/", { replace: true });
-      }
-    })
+  const handleSubmit = async (data: any) => {
+    setIsLoading(5)
+    const result = await dispatch(login(data))
+    if (result.payload) {
+      navigate("/portaldocolaborador/", { replace: true });
+    }
   };
 
-  const handleSubmitAdmin = () => {
+  const handleSubmitAdmin = async () => {
     setIsLoading(1)
-    axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
-      email: "admregistration@gmail.com",
-      password: "admregister2@"
-    }).then(response => {
-      if (response.status === 200) {
-        dispatch(loginUser({
-          email: "adminregister@gmail.com",
-        }))
-        navigate("/portaldocolaborador/", { replace: true });
-      }
-    })
-    setIsLoading(0)
+    const result = await dispatch(login({ email: "adminregister@gmail.com", password: "adminregister2@" }));
+    if (result.payload) {
+      navigate("/portaldocolaborador/", { replace: true });
+    }
   };
 
-  const handleSubmitDoctor = () => {
+  const handleSubmitDoctor = async () => {
     setIsLoading(2)
-    axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
-      email: "doctorregister@gmail.com",
-      password: "doctorregister2@"
-    }).then(response => {
-      if (response.status === 200) {
-        dispatch(loginUser({
-          email: "doctorregister@gmail.com",
-        }))
-        navigate("/portaldocolaborador/", { replace: true });
-      }
-    })
-    setIsLoading(0)
+    const result = await dispatch(login({ email: "doctorregister@gmail.com", password: "doctorregister2@" }))
+    if (result.payload) {
+      navigate("/portaldocolaborador/", { replace: true });
+    }
   };
 
-  const handleSubmitAttendance = () => {
+  const handleSubmitAttendance = async () => {
     setIsLoading(3)
-    axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
-      email: "attendanceregister@gmail.com",
-      password: "attendanceregister2@"
-    }).then(response => {
-      if (response.status === 200) {
-        dispatch(loginUser({
-          email: "attendanceregister@gmail.com",
-        }))
-        navigate("/portaldocolaborador/", { replace: true });
-      }
-    })
-    setIsLoading(0)
+    const result = await dispatch(login({ email: "attendanceregister@gmail.com", password: "attendanceregister2@" }))
+    if (result.payload) {
+      navigate("/portaldocolaborador/", { replace: true });
+    }
   };
 
-  const handleSubmitFinance = () => {
+  const handleSubmitFinance = async () => {
     setIsLoading(4)
-    axios.post('https://backend-clinic-hub.vercel.app/auth/authenticate', {
-      email: "financeregister@gmail.com",
-      password: "financeregister2@"
-    }).then(response => {
-      if (response.status === 200) {
-        dispatch(loginUser({
-          email: "financeregister@gmail.com",
-        }))
-        navigate("/portaldocolaborador/", { replace: true });
-      }
-    })
-    setIsLoading(0)
+    const result = await dispatch(login({ email: "financeregister@gmail.com", password: "financeregister2@" }))
+    if (result.payload) {
+      navigate("/portaldocolaborador/", { replace: true });
+    }
   };
 
   return (
@@ -190,12 +152,19 @@ export const Login = () => {
                   <label htmlFor="subscribeNews"> Lembrar meu acesso </label>
                 </div>
 
+                {/* {isLoading === 5 ?
+                  <button
+                    className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                  >
+                    <AiOutlineLoading3Quarters className="animate-spin" />
+                  </button> : */}
                 <button
-                  type="submit"
+                  onClick={handleSubmitAdmin}
                   className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
                 >
                   Acessar
                 </button>
+                {/* } */}
 
               </form>
               <button

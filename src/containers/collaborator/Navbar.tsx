@@ -1,10 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux/es/exports";
-// import { State } from "../../redux/root-reducer";
+import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../features/hooks/hooks";
+import { logoutAction } from "../../features/auth/authSlice";
 
 export const Navbar = () => {
-  // const { currentUser } = useSelector((rootReducer: State) => rootReducer.user)
+  const user = useAppSelector((state) => state.rootReducer.auth.user)
+  const dispatch = useAppDispatch()
+
+  const handleLogout = () => {
+    dispatch(logoutAction())
+  }
 
   return (
     <div className="lg:flex justify-between items-center ml-12 hidden">
@@ -34,18 +40,17 @@ export const Navbar = () => {
 
       <div className="flex gap-6 items-center">
         <span className="text-sm text-blue-600">
-          Bem vindo ao ClinicHub
-          {/* Bem vindo ao ClinicHub, {currentUser.user} */}
+          Bem vindo ao ClinicHub, {user?.name}
         </span>
         <Link to="meu-perfil">
           <i className="fa-solid fa-gears text-2xl text-blue-600 hover:text-blue-800 transition-all"></i>
         </Link>
-        <Link
-          to="/"
+        <button
+          onClick={handleLogout}
           className="flex items-center justify-center h-[40px] text-sm px-4 bg-blue-600 rounded-lg cursor-pointer text-white hover:bg-blue-800 transition-all"
         >
           Sair do Sistema
-        </Link>
+        </button>
       </div>
     </div>
   );

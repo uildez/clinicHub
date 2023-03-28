@@ -18,14 +18,11 @@ import { Procedures } from "./Procedures";
 import { NewProcedure } from "./NewProcedure";
 import { NewStorage } from "./NewStorage";
 import { Config } from "./Config";
-
-import { useSelector } from "react-redux/es/exports";
-// import { State } from "../../redux/root-reducer";
+import { useAppSelector } from "../../features/hooks/hooks";
 
 export const Dashboard = () => {
-  // const { currentUser } = useSelector((rootReducer: State) => rootReducer.user)
+  const user = useAppSelector((state) => state.rootReducer.auth.user)
 
-  // console.log({ currentUser })
   return (
     <motion.div
       initial={{ opacity: 0 }}

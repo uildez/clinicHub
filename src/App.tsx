@@ -39,13 +39,8 @@ function App() {
               <Route path="/portaldopaciente/*" element={<Schedule />} />
               <Route path="portaldocolaborador/login" element={<Login />} />
               <Route path="/portaldocolaborador/*" element={
-                // <PrivateRoute >
-                <Dashboard />
-                // </PrivateRoute> 
-              } />
-              <Route path="/portaldocolaborador/teste" element={
                 <PrivateRoute >
-                  <h1>TEST</h1>
+                  <Dashboard />
                 </PrivateRoute>
               } />
             </Routes>
