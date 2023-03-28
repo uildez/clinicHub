@@ -1,9 +1,9 @@
+import { GridColDef } from "@mui/x-data-grid";
 import {
-  GridColumns,
   GridRowsProp
 } from "@mui/x-data-grid-pro";
 
-export const columnsInsurance: GridColumns = [
+export const columnsInsurance: GridColDef[] = [
   {
     field: "name",
     headerName: "Nome",

@@ -1,6 +1,7 @@
-import { GridColumns, GridRowsProp } from "@mui/x-data-grid-pro";
+import { GridColDef } from "@mui/x-data-grid";
+import { GridRowsProp } from "@mui/x-data-grid-pro";
 
-export const columnsDebitPacient: GridColumns = [
+export const columnsDebitPacient: GridColDef[] = [
   {
     field: "dueDate",
     headerName: "Data",

@@ -1,4 +1,4 @@
-import { GridApi, GridCellValue, GridColDef } from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 
 export const columns: GridColDef[] = [
@@ -81,23 +81,7 @@ export const columns: GridColDef[] = [
     width: 120,
     align: "left",
     description: "Clique no botão para editar as informações do paciente.",
-    renderCell: (params) => {
-      const onClick = (e: any) => {
-        e.stopPropagation(); // don't select this row after clicking
-
-        const api: GridApi = params.api;
-        const thisRow: Record<string, GridCellValue> = {};
-
-        api
-          .getAllColumns()
-          .filter((c) => c.field !== "__check__" && !!c)
-          .forEach(
-            (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-          );
-
-        return alert(JSON.stringify(thisRow, null, 4));
-      };
-
+    renderCell: () => {
       return (
         <Link to="/portaldocolaborador/pacientes/pagina-paciente/sobre">
           <span className="flex gap-2 items-center w-[40px] h-[40px] text-lg text-white lowercase bg-green-500 rounded-lg hover:bg-green-700">

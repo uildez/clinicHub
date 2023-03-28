@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MenuItem, TextField } from "@mui/material";
-import { DataGrid, GridColDef, ptBR } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ButtonBack } from "../../components/ButtonBack";
 import {
   createTheme,
@@ -12,8 +12,7 @@ import {
 import "@mui/styles";
 
 declare module "@mui/styles/defaultTheme" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
+  interface DefaultTheme extends Theme { }
 }
 
 const theme = createTheme(
@@ -196,8 +195,9 @@ export const Equip = () => {
               <DataGrid
                 rows={inputFields}
                 columns={columns}
-                pageSize={7}
-                rowsPerPageOptions={[7]}
+                pagination={true}
+                autoHeight={true}
+                pageSizeOptions={[7]}
               />
             </ThemeProvider>
           </StyledEngineProvider>

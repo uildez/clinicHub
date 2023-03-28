@@ -232,8 +232,9 @@ export const AcessTable = () => {
           rows={inputFields}
           columns={columns}
           getRowHeight={() => "auto"}
-          pageSize={7}
-          rowsPerPageOptions={[7]}
+          pagination={true}
+          autoHeight={true}
+          pageSizeOptions={[7]}
         />
       </div>
     </div>

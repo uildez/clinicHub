@@ -53,8 +53,9 @@ export const Pacients = () => {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={7}
-            rowsPerPageOptions={[7]}
+            pagination={true}
+            autoHeight={true}
+            pageSizeOptions={[7]}
             sx={{
               color: "#4B5563",
               border: 0,

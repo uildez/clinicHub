@@ -323,7 +323,7 @@ export const NewStorage = () => {
             <div className="flex flex-col md:w-1/5 w-full">
               <img
                 src={preview}
-                className="bg-[url('https://cdn-icons-png.flaticon.com/512/149/149071.png')] bg-cover w-full md:h-full min-h-[100px] rounded-lg overflow-hidden bg-cover bg-center"
+                className="bg-[url('https://cdn-icons-png.flaticon.com/512/149/149071.png')] bg-cover w-full md:h-full min-h-[100px] rounded-lg overflow-hidden bg-center"
               />
               <label className="flex flex-col text-base text-white w-full gap-2 font-medium py-1 bg-blue-600 cursor-pointer items-center justify-center rounded-br-lg rounded-bl-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out">
                 Selecione a foto
@@ -698,8 +698,9 @@ export const NewStorage = () => {
             <DataGrid
               rows={inputFields}
               columns={columns}
-              pageSize={7}
-              rowsPerPageOptions={[7]}
+              pagination={true}
+              autoHeight={true}
+              pageSizeOptions={[7]}
             />
           </div>
 

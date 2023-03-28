@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DataGrid, GridApi, GridCellValue, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridKeyValue } from "@mui/x-data-grid";
 import { ButtonBack } from "../../components/ButtonBack";
 import { Button } from "@mui/material";
 
@@ -77,16 +77,7 @@ export function Exams() {
         const onClick = (e: any) => {
           e.stopPropagation(); // don't select this row after clicking
 
-          const api: GridApi = params.api;
-          const thisRow: Record<string, GridCellValue> = {};
-
-          api
-            .getAllColumns()
-            .filter((c) => c.field !== "__check__" && !!c)
-            .forEach(
-              (c) => (thisRow[c.field] = params.getValue(params.id, c.field))
-            );
-
+          const thisRow: Record<string, GridKeyValue> = {};
           return alert(JSON.stringify(thisRow, null, 4));
         };
 
@@ -210,8 +201,9 @@ export function Exams() {
           <DataGrid
             rows={rows}
             columns={columns}
-            pageSize={7}
-            rowsPerPageOptions={[7]}
+            pagination={true}
+            autoHeight={true}
+            pageSizeOptions={[7]}
           />
         </div>
       </div>

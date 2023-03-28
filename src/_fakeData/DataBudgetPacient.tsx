@@ -1,13 +1,8 @@
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 
-import {
-  GridColumns,
-  GridRowsProp,
-  GridActionsCellItem,
-} from "@mui/x-data-grid-pro";
+import { GridRowsProp } from "@mui/x-data-grid-pro";
+import { GridColDef } from "@mui/x-data-grid";
 
-export const columnsBudget: GridColumns = [
+export const columnsBudget: GridColDef[] = [
   {
     field: "dueDate",
     headerName: "Data",

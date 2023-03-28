@@ -13,7 +13,7 @@ import {
 
 declare module "@mui/styles/defaultTheme" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  interface DefaultTheme extends Theme {}
+  interface DefaultTheme extends Theme { }
 }
 
 const theme = createTheme(
@@ -240,8 +240,9 @@ export const InsurancePacient = () => {
             <DataGrid
               rows={inputFields}
               columns={columns}
-              pageSize={7}
-              rowsPerPageOptions={[7]}
+              pagination={true}
+              autoHeight={true}
+              pageSizeOptions={[7]}
             />
           </ThemeProvider>
         </StyledEngineProvider>

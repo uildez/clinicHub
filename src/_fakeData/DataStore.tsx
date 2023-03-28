@@ -1,9 +1,7 @@
-import {
-  GridColumns,
-  GridRowsProp
-} from "@mui/x-data-grid-pro";
+import { GridColDef } from "@mui/x-data-grid";
+import { GridRowsProp } from "@mui/x-data-grid-pro";
 
-export const columnsStore: GridColumns = [
+export const columnsStore: GridColDef[] = [
   {
     field: "idProduct",
     headerName: "Id do Produto",

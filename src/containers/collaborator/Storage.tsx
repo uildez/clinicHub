@@ -11,7 +11,6 @@ import { columnsStore, rowsStore } from "../../_fakeData/DataStore";
 import { Link } from "react-router-dom";
 
 declare module "@mui/styles/defaultTheme" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme { }
 }
 

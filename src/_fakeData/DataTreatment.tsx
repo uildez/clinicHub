@@ -1,7 +1,8 @@
-import { GridColumns, GridRowsProp } from "@mui/x-data-grid-pro";
+import { GridColDef } from "@mui/x-data-grid";
+import { GridRowsProp } from "@mui/x-data-grid-pro";
 import { Link } from "react-router-dom";
 
-export const columnsTreatment: GridColumns = [
+export const columnsTreatment: GridColDef[] = [
   {
     field: "plan",
     headerName: "Plano",

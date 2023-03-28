@@ -261,8 +261,9 @@ export const Employees = () => {
             }}
             rows={rows}
             columns={columns}
-            pageSize={7}
-            rowsPerPageOptions={[7]}
+            pagination={true}
+            autoHeight={true}
+            pageSizeOptions={[7]}
           />
         </div>
       </div>
