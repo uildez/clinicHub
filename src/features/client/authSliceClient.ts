@@ -20,18 +20,21 @@ const authSliceClient = createSlice({
             localStorage.setItem('client', JSON.stringify(client));
             state.client = client
             state.loading = false;
-            state.error = null;
-            if (client) {
-
+            if (state.error !== null) {
+                state.error.error = action.payload;
             }
         },
         loginClientStart: (state) => {
             state.loading = true;
-            state.error = null;
+            if (state.error == null) {
+                state.error = null;
+            }
         },
         loginClientFailure: (state, action: PayloadAction<string>) => {
             state.loading = false;
-            state.error = action.payload;
+            if (state.error !== null) {
+                state.error.error = action.payload;
+            }
         },
         logoutClient: (state) => {
             state.client = null;
