@@ -30,7 +30,6 @@ export const Navbar = () => {
             required
           />
           <button
-            // type="submit"
             className="text-white relative right-10 bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none outline-none focus:ring-blue-600 font-medium rounded-lg text-sm w-[40px] h-[40px] transition-all"
           >
             <i className="fa-solid fa-magnifying-glass"></i>

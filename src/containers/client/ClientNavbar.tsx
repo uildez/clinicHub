@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
+import { useAppSelector } from "../../features/hooks/hooks";
 
 export function ClientNavbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const client = useAppSelector((state) => state.rootReducer.authClient.client)
 
   function openModal() {
     setIsOpen(true);
@@ -17,9 +19,9 @@ export function ClientNavbar() {
       <div className="flex flex-row gap-8 items-center">
         <div className="">
           <h2 className="text-blue-600 font-bold text-2xl">
-            Olá, Nome do Paciente
+            Olá. {client ? <>{client?.name}</> : <>Seja bem vindo</>}
           </h2>
-          <span className=" text-blue-600 text-sm">CPF: XXX.XXX.XXX-XX</span>
+          <span className=" text-blue-600 text-sm">{client ? <>CPF: {client?.cpf}</> : <>Faça login abaixo para acessar o sistema</>}</span>
         </div>
         <i
           onClick={openModal}

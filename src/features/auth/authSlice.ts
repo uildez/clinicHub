@@ -3,8 +3,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthState, LoginData, User } from 'types.utils';
 import { RootState } from 'redux/root-reducer';
 
+const user = JSON.parse(localStorage.getItem('user') ?? 'null');
+
 const initialState: AuthState = {
-    user: null,
+    user: user,
     loading: false,
     error: null,
 };
@@ -15,6 +17,7 @@ const authSlice = createSlice({
     reducers: {
         loginSuccess: (state, action) => {
             const { user } = action.payload
+            localStorage.setItem('user', JSON.stringify(user));
             state.user = user
             state.loading = false;
             state.error = null;
@@ -50,6 +53,7 @@ export const login = createAsyncThunk('auth/login', async (data: LoginData, { re
 
 export const logoutAction = () => async (dispatch: any) => {
     dispatch(logout());
+    localStorage.removeItem('user');
 };
 
 export const selectCurrentUser = (state: RootState) => state

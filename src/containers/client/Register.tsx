@@ -10,11 +10,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 //Material-ui
-import { styled, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
 // Yup
 import * as yup from "yup";
 import { DatePicker } from "@mui/x-date-pickers";
+import { useAppDispatch } from "../../features/hooks/hooks";
+import { registerClient } from "../../features/client/registerClient";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
+
+import { parse, format, formatISO } from 'date-fns';
 
 interface IFormInputs {
   name: string;
@@ -22,7 +27,6 @@ interface IFormInputs {
   date: Date;
   password: string;
   phone: string;
-
   cpf: string;
   email: string;
 }
@@ -34,11 +38,10 @@ const schema = yup
       .min(10, "Deve ter mais de 10 caracteres")
       .max(100, "Deve ser menor que 100 caracteres")
       .required("Campo obrigatório."),
-    tel: yup
-      .string()
-      .matches(new RegExp("[0-9]{7}"))
+    date: yup
+      .date()
+      .typeError("Esse campo não pode ser vazio")
       .required("Campo obrigatório."),
-    date: yup.string().required("Campo obrigatório."),
     email: yup
       .string()
       .email("Formato de email inválido.")
@@ -47,10 +50,12 @@ const schema = yup
       .string()
       .required("Campo obrigatório.")
       .min(8, "A senha deve ter entre 8 a 12 caracteres."),
-    phone: yup.string().required("Campo obrigatório."),
-
+    phone: yup
+      .string()
+      // .matches(new RegExp("^\(\d{2}\) \d{4}-\d{4}$"))
+      .required("Campo obrigatório."),
     cpf: yup
-      .number()
+      .string()
       .required("Campo obrigatório.")
       .min(11, "A quantidade mínima é de 11 caracteres.")
       .typeError("Esse campo não pode ser vazio"),
@@ -59,7 +64,10 @@ const schema = yup
 
 export function Register() {
   const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(0);
+
+  const dispatch = useAppDispatch()
 
   const {
     register,
@@ -70,9 +78,13 @@ export function Register() {
     resolver: yupResolver(schema),
   });
 
-  const handleSubmit = (data: any) => {
-    console.log(data);
-    navigate("/portaldopaciente/", { replace: true });
+  const handleSubmit = async (data: any) => {
+    setIsLoading(1)
+    const modifiedData = { ...data, date: formatISO(data.date) };
+    const result = await dispatch(registerClient(modifiedData))
+    if (result.payload) {
+      navigate("/portaldopaciente/", { replace: true });
+    }
   };
 
   return (
@@ -102,13 +114,15 @@ export function Register() {
                       <TextField
                         {...params}
                         {...register("date")}
+                        type="date"
                         helperText={errors?.date?.message}
                         error={errors?.date ? true : false}
                       />
                     )}
                     value={selectedDate}
                     onChange={(newValue: any) => {
-                      setSelectedDate(newValue);
+                      const formattedDate = formatISO(newValue, { representation: 'complete' });
+                      setSelectedDate(formattedDate);
                     }}
                   />
 
@@ -167,23 +181,28 @@ export function Register() {
                 </a>
               </div>
               <div className="flex lg:flex-row flex-col w-full justify-end">
-                <button
-                  type="submit"
-                  className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-                >
-                  Salvar conta
-                </button>
+                {isLoading === 1 ?
+                  <button
+                    className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 min-w-[121px] min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                  >
+                    <AiOutlineLoading3Quarters className="animate-spin" />
+                  </button> :
+                  <button
+                    type="submit"
+                    className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                  >
+                    Criar conta
+                  </button>
+                }
               </div>
             </form>
             <span className="pt-4 mx-auto">
               Já tem conta?
-              <Link to="../entrar">
-                <button
-                  // onClick={handleSign}
-                  className="cursor-pointer font-medium hover:font-semibold transition-all ml-2"
-                >
-                  Acesse aqui
-                </button>
+              <Link
+                to="../entrar"
+                className="cursor-pointer font-medium hover:font-semibold transition-all ml-2"
+              >
+                Acesse aqui
               </Link>
             </span>
           </div>

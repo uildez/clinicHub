@@ -3,14 +3,20 @@ import Logored from "../../_assets/images/logo/logo-blue.png";
 import { LinkMenu } from "./LinkMenu";
 
 import { useLocation } from "react-router-dom";
+import { useAppDispatch } from "../../features/hooks/hooks";
+import { logoutAction } from "../../features/auth/authSlice";
 
 export const MenuMobile = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
   const location = useLocation();
+  const dispatch = useAppDispatch()
+
+  const handleLogout = () => {
+    dispatch(logoutAction())
+  }
 
   return (
     <div className="lg:hidden flex">
-      {/* Mobile Menu */}
       <i
         className="fa-solid fa-bars flex items-center justify-center absolute left-4 bg-blue-600 hover:bg-blue-800 p-2 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white lg:!hidden"
         color="#fff"
@@ -23,7 +29,7 @@ export const MenuMobile = () => {
         className="absolute w-[160px] top-2 right-2/4 translate-x-1/2 mx-auto lg:hidden"
       />
 
-      <i className="fa-solid fa-right-from-bracket flex items-center justify-center absolute right-4 bg-blue-600 hover:bg-blue-800 p-2 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white lg:!hidden"></i>
+      <button onClick={handleLogout} className="fa-solid fa-right-from-bracket flex items-center justify-center absolute right-4 bg-blue-600 hover:bg-blue-800 p-2 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white lg:!hidden"></button>
 
       <div
         className={`flex flex-col items-center h-full ${toggleMenu ? "w-3/5 px-4" : "w-[0px]"

@@ -1,12 +1,11 @@
-import { Navigate, Route, RouteProps, RouterProps, Routes, redirect, RoutesProps } from "react-router-dom";
-import { BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 
 import { Home } from "./pages/Home";
 import { Schedule } from "./pages/Schedule";
 import { Dashboard } from "./containers/collaborator/Dashboard";
 import { Login } from "./containers/collaborator/Login";
-
-import { AnimatePresence } from "framer-motion";
+import { PrivateRoute } from "./routes/PrivateRoute";
 
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
@@ -14,7 +13,6 @@ import bgLocale from "date-fns/locale/pt-BR";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 import { ptBR } from "@mui/x-data-grid";
-import { PrivateRoute } from "./routes/PrivateRoute";
 
 const theme = createTheme(
   {

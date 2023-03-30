@@ -11,6 +11,9 @@ import { styled, TextField } from "@mui/material";
 
 // Yup
 import * as yup from "yup";
+import { useAppDispatch, useAppSelector } from "../../features/hooks/hooks";
+import { loginClient } from "../../features/client/authSliceClient";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface IFormInputs {
   email: string;
@@ -32,13 +35,10 @@ const schema = yup
 
 export function Login() {
   const navigate = useNavigate();
-  const [unit, setUnit] = useState("");
+  const [isLoading, setIsLoading] = useState(0)
 
-  //Handle Role
-  const handleUnit = (event: any) => {
-    event.stopPropagation();
-    setUnit(event.target.value as string);
-  };
+  const dispatch = useAppDispatch()
+  const error = useAppSelector((state) => state.rootReducer.authClient.error)
 
   const {
     register,
@@ -49,15 +49,30 @@ export function Login() {
     resolver: yupResolver(schema),
   });
 
-  const handleSubmit = (data: any) => {
-    console.log(data);
-    navigate("/portaldopaciente/", { replace: true });
+  const handleSubmit = async (data: any) => {
+    setIsLoading(4)
+    const result = await dispatch(loginClient(data))
+    if (result.payload) {
+      navigate("/portaldopaciente/", { replace: true });
+    }
+  };
+
+  const handleGuest = async () => {
+    setIsLoading(2)
+    const guestData = {
+      "email": "clienteconvidado@gmail.com",
+      "password": "ClientHubClinic"
+    };
+    const result = await dispatch(loginClient(guestData))
+    if (result.payload) {
+      navigate("/portaldopaciente/", { replace: true });
+    }
   };
 
   return (
     <>
       <form onSubmit={onSubmit(handleSubmit)} className="mt-10">
-        <div className="flex flex-col gap-4 min-h-[180px]">
+        <div className="flex flex-col gap-4 mb-4">
           <TextField
             id="outlined-basic"
             {...register("email")}
@@ -77,8 +92,9 @@ export function Login() {
             error={errors?.password ? true : false}
             className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
           />
+          {error && error.error === 'Client not found' && <p className="mx-auto text-red-500 text-sm font-medium">Cliente não encontrado</p>}
         </div>
-        <div className="flex justify-between mt-4 text-sm">
+        <div className="flex justify-between text-sm">
           <div>
             {" "}
             <input
@@ -96,13 +112,40 @@ export function Login() {
             Esqueci minha senha
           </a>
         </div>
+
+
+        {isLoading === 4 ?
+          <button
+            type="button"
+            className="flex text-base text-white w-full gap-2 font-medium p-2 mt-4 min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+          >
+            <AiOutlineLoading3Quarters className="animate-spin" />
+          </button>
+          :
+          <button
+            type="submit"
+            className="flex text-base text-white w-full gap-2 font-medium p-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+          >
+            Fazer Login
+          </button>
+        }
+      </form>
+      {isLoading === 2 ?
         <button
-          type="submit"
+          className="flex text-base text-white w-full gap-2 font-medium p-2 mt-4 min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+        >
+          <AiOutlineLoading3Quarters className="animate-spin" />
+        </button>
+        :
+        <button
+          onClick={handleGuest}
+          type="button"
           className="flex text-base text-white w-full gap-2 font-medium p-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
         >
-          Fazer Login
+          Login como Convidado
         </button>
-      </form>
+      }
+
       <span className="pt-4 mx-auto">
         Já tem conta?
         <Link

@@ -190,8 +190,8 @@ export const rowsTreatment: GridRowsProp = [
 
 export const TreatmentPacient = () => {
   return (
-    <div>
+    <>
       <h1 className="text-blue-600">TWETETSDFCMSLDKFJSDLKFJDOÇSLKFJ</h1>
-    </div>
+    </>
   );
 };

@@ -1,5 +1,5 @@
 //React
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Modal from "react-modal";
@@ -20,7 +20,7 @@ import Logo from "../../_assets/images/logo/logo-blue.png";
 
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { login } from "../../features/auth/authSlice";
-import { useAppDispatch } from "../../features/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../features/hooks/hooks";
 
 interface IFormInputs {
   email: string;
@@ -42,8 +42,16 @@ export const Login = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(0);
   const navigate = useNavigate();
-
   const dispatch = useAppDispatch()
+  const user = useAppSelector((state) => state.rootReducer.auth.user)
+  const error = useAppSelector((state) => state.rootReducer.auth.error)
+
+  useEffect(() => {
+    if (user) {
+      navigate("/portaldocolaborador")
+    }
+  }, [user])
+
 
   function openModal() {
     setIsOpen(true);
@@ -71,7 +79,7 @@ export const Login = () => {
 
   const handleSubmitAdmin = async () => {
     setIsLoading(1)
-    const result = await dispatch(login({ email: "adminregister@gmail.com", password: "adminregister2@" }));
+    const result = await dispatch(login({ email: "adminregister2@gmail.com", password: "adminregister2@" }));
     if (result.payload) {
       navigate("/portaldocolaborador/", { replace: true });
     }
@@ -141,6 +149,7 @@ export const Login = () => {
                   error={errors?.password ? true : false}
                   className="text-gray-900 text-sm rounded-lg z-0 outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
                 />
+                {error && error.error === 'User not found' && <p className="mx-auto text-red-500 text-sm font-medium">Usuário não encontrado</p>}
                 <div>
                   {" "}
                   <input
@@ -154,12 +163,12 @@ export const Login = () => {
 
                 {isLoading === 5 ?
                   <button
-                    className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                    className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
                   >
                     <AiOutlineLoading3Quarters className="animate-spin" />
                   </button> :
                   <button
-                    onClick={handleSubmitAdmin}
+                    type="submit"
                     className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
                   >
                     Acessar
@@ -198,7 +207,7 @@ export const Login = () => {
             <p className="line-clamp-3 overflow-hidden">Usuário com acesso total a todas as telas e transições financeiras entre outros.</p>
             {isLoading === 1 ?
               <button
-                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
               >
                 <AiOutlineLoading3Quarters className="animate-spin" />
               </button> :
@@ -219,7 +228,7 @@ export const Login = () => {
             <p className="line-clamp-3 overflow-hidden">Usuário com acesso restrito a pacientes e seus atendimentos.</p>
             {isLoading === 2 ?
               <button
-                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
               >
                 <AiOutlineLoading3Quarters className="animate-spin" />
               </button> :
@@ -240,7 +249,7 @@ export const Login = () => {
             <p className="line-clamp-3 overflow-hidden">Usuário com acesso a restrito a pacientes e grade de atendimentos...</p>
             {isLoading === 3 ?
               <button
-                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
               >
                 <AiOutlineLoading3Quarters className="animate-spin" />
               </button> :
@@ -262,7 +271,7 @@ export const Login = () => {
             <p className="line-clamp-3 overflow-hidden">Usuário com acesso restrito a financeiro e funcionários.</p>
             {isLoading === 4 ?
               <button
-                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+                className="flex text-base text-white w-full gap-2 font-medium p-2 mt-2 min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
               >
                 <AiOutlineLoading3Quarters className="animate-spin" />
               </button> :

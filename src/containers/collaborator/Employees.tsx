@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { ButtonBack } from "../../components/ButtonBack";
-import { BarChart } from "../../components/charts/BarChart";
 
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import faker from "faker";

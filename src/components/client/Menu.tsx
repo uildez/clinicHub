@@ -1,35 +1,42 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../../_assets/images/logo/icon-blue.png";
 import { LinkMenu } from "./LinkMenu";
+import Logo from "../../_assets/images/logo/icon-blue.png";
+import { logoutActionClient } from "../../features/client/authSliceClient";
+import { useAppDispatch } from "../../features/hooks/hooks";
 
 export const Menu = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
-  const [user, setUser] = useState(true);
+  // const [user, setUser] = useState(true);
+  const dispatch = useAppDispatch()
 
-  function userToggle() {
-    {
-      if (user === true) {
-        return (
-          <LinkMenu
-            routing="entrar"
-            text="Fazer Login"
-            icon="fa-solid fa-user"
-            active={true}
-          />
-        );
-      } else {
-        return (
-          <LinkMenu
-            routing=""
-            text="Sair"
-            icon="fa-solid fa-right-from-bracket"
-            active={true}
-          />
-        );
-      }
-    }
+  const handleLogoutClient = () => {
+    dispatch(logoutActionClient())
   }
+
+  // function userToggle() {
+  //   {
+  //     if (user === true) {
+  //       return (
+  //         <LinkMenu
+  //           routing="entrar"
+  //           text="Fazer Login"
+  //           icon="fa-solid fa-user"
+  //           active={true}
+  //         />
+  //       );
+  //     } else {
+  //       return (
+  //         <LinkMenu
+  //           routing=""
+  //           text="Sair"
+  //           icon="fa-solid fa-right-from-bracket"
+  //           active={true}
+  //         />
+  //       );
+  //     }
+  //   }
+  // }
 
   function setMenu() {
     setToggleMenu((toggleMenu) => !toggleMenu);
@@ -135,13 +142,20 @@ export const Menu = () => {
         <Menu />
       </div>
       <div className="lg:flex flex-col gap-4 hidden">
-        <LinkMenu
-          routing="/"
-          text="Voltar para o site"
-          icon="fa-solid fa-circle-chevron-left"
-          active={true}
-        />
-        {userToggle()}
+        <button
+          className={
+            "flex cursor-pointer hover:lg:scale-105 group hover:shadow-blue-800/50 hover:text-blue-800 transition ease-in-out"
+          }
+          onClick={handleLogoutClient}
+          type="button"
+        >
+          <i className="fa-solid fa-right-from-bracket text-xl  text-blue-600"></i>
+          <div className="flex justify-start lg:ml-0 ml-2 top-[0rem] lg:absolute overflow-hidden lg:max-w-[0px] group-hover:lg:max-w-[250px] group-hover:lg:min-w-[230px] rounded-lg lg:left-16">
+            <span className="lg:bg-blue-600 lg:text-white lg:px-4 lg:scale-105 rounded-lg">
+              Sair do sistema
+            </span>
+          </div>
+        </button>
       </div>
     </div>
   );

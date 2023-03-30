@@ -1,13 +1,12 @@
-import React, { ReactNode } from 'react'
 import { Navigate } from 'react-router'
-
-const user = false
-
+import { useAppSelector } from '../features/hooks/hooks'
 interface PrivateRoutesProps {
     children: JSX.Element,
     path?: string
 }
 
 export const PrivateRouteClient = ({ children }: PrivateRoutesProps) => {
-    return user ? children : <Navigate to='/portaldopaciente/entrar' replace={true} />
+    const client = useAppSelector((state) => state.rootReducer.authClient.client)
+
+    return client ? children : <Navigate to='/portaldopaciente/entrar' replace={true} />
 }
