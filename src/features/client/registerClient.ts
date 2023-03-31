@@ -25,9 +25,7 @@ const registerClientSlice = createSlice({
         },
         registerClientFailure: (state, action: PayloadAction<string>) => {
             state.loading = false;
-            if (state.error !== null) {
-                state.error.error = action.payload;
-            }
+            state.error = action.payload;
         }
     },
 });

@@ -15,12 +15,12 @@ export interface LoginData {
 export interface AuthState {
     user: User | null;
     loading: boolean;
-    error: null | { error: string | null };
+    error: string | null;
 }
 export interface AuthStateClient {
     client: Client | null;
     loading: boolean;
-    error: null | { error: string | null };
+    error: string | null;
 }
 export interface Client {
     _id: string,

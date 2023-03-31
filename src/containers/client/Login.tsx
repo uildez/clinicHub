@@ -15,6 +15,10 @@ import { useAppDispatch, useAppSelector } from "../../features/hooks/hooks";
 import { loginClient } from "../../features/client/authSliceClient";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
+interface ErrorObject {
+  error: { error: string };
+}
+
 interface IFormInputs {
   email: string;
   password: string;
@@ -39,6 +43,8 @@ export function Login() {
 
   const dispatch = useAppDispatch()
   const error = useAppSelector((state) => state.rootReducer.authClient.error)
+
+  console.log(error)
 
   const {
     register,
@@ -92,7 +98,10 @@ export function Login() {
             error={errors?.password ? true : false}
             className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
           />
-          {error && error.error === 'Client not found' && <p className="mx-auto text-red-500 text-sm font-medium">Cliente não encontrado</p>}
+
+          {typeof error === 'object' && error !== null && (
+            <p className="mx-auto text-red-500 text-sm font-medium">Email ou senha inválidos</p>
+          )}
         </div>
         <div className="flex justify-between text-sm">
           <div>

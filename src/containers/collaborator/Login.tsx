@@ -46,6 +46,9 @@ export const Login = () => {
   const user = useAppSelector((state) => state.rootReducer.auth.user)
   const error = useAppSelector((state) => state.rootReducer.auth.error)
 
+  console.log(error)
+
+
   useEffect(() => {
     if (user) {
       navigate("/portaldocolaborador")
@@ -149,7 +152,9 @@ export const Login = () => {
                   error={errors?.password ? true : false}
                   className="text-gray-900 text-sm rounded-lg z-0 outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
                 />
-                {error && error.error === 'User not found' && <p className="mx-auto text-red-500 text-sm font-medium">Usuário não encontrado</p>}
+                {typeof error === 'object' && error !== null && (
+                  <p className="mx-auto text-red-500 text-sm font-medium">Email ou senha inválidos</p>
+                )}
                 <div>
                   {" "}
                   <input
