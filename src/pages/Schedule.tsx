@@ -24,7 +24,7 @@ export const Schedule = () => {
     >
       <div className="bg-blue-200">
         <Menu />
-        <div className="flex flex-col bg-[#ddd6fe] lg:h-full h-auto min-h-screen w-screen lg:justify-between lg:pl-28 lg:py-6 lg:pr-12 p-8 pt-20">
+        <div className="flex flex-col bg-[#e9e9e9] lg:h-full h-auto min-h-screen w-screen lg:justify-between lg:pl-28 lg:py-6 lg:pr-12 p-8 pt-20">
           <ClientNavbar />
           <Routes>
             <Route path="/" element={
