@@ -1,5 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../features/hooks/hooks";
 
 interface LinkProps {
   toggleMenu: any;
@@ -7,6 +7,7 @@ interface LinkProps {
   icon: string;
   title: string;
   location: any;
+  userTypeAllowed: string[]
 }
 
 export const LinkMenu = ({
@@ -15,30 +16,45 @@ export const LinkMenu = ({
   icon,
   title,
   location,
+  userTypeAllowed
 }: LinkProps) => {
+
+  const user = useAppSelector((state) => state.rootReducer.auth.user)
+  const hasPermission = userTypeAllowed?.length === 0 || userTypeAllowed?.includes(user!.type)
+
+  if (!hasPermission) {
+    return null
+  }
+
   return (
-    <Link
-      to={routing}
-      className={`flex items-center 
-          ${toggleMenu ? "justify-left" : "justify-center"} px-4 gap-2 w-full 
-          ${toggleMenu ? "w-full h-[45px]" : "max-w-[45px] h-[45px]"} 
-          ${
-            location.includes(routing)
-              ? "bg-blue-600 scale-105"
-              : "bg-gray-600 hover:bg-blue-600 hover:scale-105 hover:ring-1 ring-blue-600 ring-offset-2"
-          } 
-          min-h-[45px] rounded-2xl transition-all cursor-pointer overflow-hidden`}
-    >
-      <i className={`${icon} ${toggleMenu ? "min-w-[20px]" : ""}`}></i>
-      <span
-        className={`${
-          toggleMenu
-            ? "block opacity-100 transition-all duration-500"
-            : "hidden opacity-0 transition-all duration-500"
-        }`}
-      >
-        {title}
-      </span>
-    </Link>
+    <>
+      {hasPermission &&
+        <Link
+          to={routing}
+          className={`flex items-center relative group
+          ${toggleMenu ? "justify-left" : "justify-center"} gap-2 w-full 
+          ${toggleMenu ? "w-full pl-8" : "max-w-[45px] pl-10"} 
+          ${location.includes(routing)
+              ? "text-blue-600 font-semibold"
+              : "text-gray-600 hover:text-blue-600"
+            } 
+          min-h-[35px] transition-all cursor-pointer`}
+        >
+          <i className={`${icon} ${toggleMenu && "min-w-[35px]"} text-blue-600`}></i>
+          {location.includes(routing) && (
+            <span className="w-[5px] bg-blue-600 absolute h-[35px] left-0 rounded-r-2xl transition-all duration-200"></span>
+          )}
+          <span className="w-[5px] bg-blue-600 absolute h-[35px] -left-10 group-hover:left-0 rounded-r-2xl transition-all duration-200"></span>
+          <span
+            className={`${toggleMenu
+              ? "block opacity-100 transition-all duration-500"
+              : "hidden opacity-0 transition-all duration-500"
+              }`}
+          >
+            {title}
+          </span>
+        </Link>
+      }
+    </>
   );
 };

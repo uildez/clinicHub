@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 // React-hook-form
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 // Import's
 import {
@@ -11,8 +11,7 @@ import {
 } from "../../../validations/NewBudget";
 
 // Material UI
-import { Divider } from "@mui/material";
-import { MenuItem, TextField } from "@mui/material";
+import { Divider, MenuItem, TextField } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import {
   columnsTreatment,
@@ -101,7 +100,7 @@ export const TreatmentPacient = () => {
     <div className="flex md:flex-row flex-col gap-4">
       <div className="md:w-4/6 w-full">
         <div className="flex flex-col justify-between w-full bg-slate-100 shadow-xl rounded-lg text-gray-600 mb-4 overflow-hidden">
-          <h1 className="text-lg py-4 px-8 bg-slate-200">Adicionar serviço</h1>
+          <h1 className="text-lg py-4 px-8 text-white font-semibold bg-blue-600">Adicionar serviço</h1>
           <form onSubmit={onSubmit(handleSubmit)} className="py-4 px-8">
             <div className="grid md:grid-cols-3 grid-cols-1 gap-4 w-full">
               <TextField
@@ -187,8 +186,8 @@ export const TreatmentPacient = () => {
           </form>
         </div>
         <div className="flex flex-col justify-between w-full bg-slate-100 shadow-xl rounded-lg text-gray-600 mb-4 overflow-hidden">
-          <div className="flex w-full items-center justify-between py-4 px-8 bg-slate-200">
-            <h3 className="text-lg text-gray-600">Serviços</h3>
+          <div className="flex w-full items-center justify-between py-4 px-8 text-white font-semibold bg-blue-600">
+            <h3 className="text-lg">Serviços</h3>
           </div>
           <div className="flex flex-col gap-4 py-4 px-8 text-sm h-[500px]">
             <DataGrid rows={rowsTreatment} columns={columnsTreatment} />
@@ -196,7 +195,7 @@ export const TreatmentPacient = () => {
         </div>
       </div>
       <div className="flex flex-col md:w-2/6 w-full bg-slate-100 shadow-xl rounded-lg text-gray-600 overflow-hidden">
-        <div className="flex items-center justify-between py-4 px-8 bg-slate-200">
+        <div className="flex items-center justify-between py-4 px-8 text-white font-semibold bg-blue-600">
           <h1 className="text-lg">Evoluções</h1>
           <div className="flex items-center text-lg gap-2">
             <i className="fa-solid fa-print cursor-pointer hover:text-blue-700 transition-all ease-in-out"></i>

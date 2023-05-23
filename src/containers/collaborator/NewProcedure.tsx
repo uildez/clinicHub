@@ -1,11 +1,11 @@
 //React
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../components/ButtonBack";
 
 // React-hook-form
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 //Material-ui
 import { MenuItem, TextField } from "@mui/material";
@@ -17,8 +17,7 @@ import {
   Checkbox,
   Divider,
   FormControlLabel,
-  FormGroup,
-  Switch,
+  Switch
 } from "@mui/material";
 import {
   FormInputsNewProcedure,
@@ -189,9 +188,9 @@ export const NewProcedure = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg text-blue-600 mb-4">
+      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-white shadow-xl rounded-lg text-blue-600 mb-4">
         <form onSubmit={onSubmit(handleSubmit)}>
           <div className="flex w-full items-center justify-between mb-4">
             <h3 className="text-lg text-blue-600 font-bold">

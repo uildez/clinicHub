@@ -1,15 +1,15 @@
-import React, { useState } from "react";
 import { MenuItem, TextField } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { ButtonBack } from "../../components/ButtonBack";
 import {
-  createTheme,
-  ThemeProvider,
-  Theme,
   StyledEngineProvider,
+  Theme,
+  ThemeProvider,
   adaptV4Theme,
+  createTheme,
 } from "@mui/material/styles";
 import "@mui/styles";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useState } from "react";
+import { ButtonBack } from "../../components/ButtonBack";
 
 declare module "@mui/styles/defaultTheme" {
   interface DefaultTheme extends Theme { }
@@ -125,9 +125,9 @@ export const Equip = () => {
   };
 
   return (
-    <>
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex flex-col bg-slate-100 shadow-xl h-auto rounded-xl p-8">
+      <div className="flex flex-col bg-white shadow-xl h-auto rounded-xl p-8">
         <h1 className="text-base font-semibold mb-4 text-blue-600">
           Adicionar Equipamento
         </h1>
@@ -203,6 +203,6 @@ export const Equip = () => {
           </StyledEngineProvider>
         </div>
       </div>
-    </>
+    </div>
   );
 };

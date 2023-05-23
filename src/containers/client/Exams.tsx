@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { Button } from "@mui/material";
 import { DataGrid, GridColDef, GridKeyValue } from "@mui/x-data-grid";
 import { ButtonBack } from "../../components/ButtonBack";
-import { Button } from "@mui/material";
 
 export function Exams() {
   const columns: GridColDef[] = [
@@ -189,11 +188,11 @@ export function Exams() {
   return (
     <>
       <ButtonBack />
-      <div className="flex flex-col bg-slate-200 text-blue-600 lg:h-4/5 h-auto rounded-xl p-8">
+      <div className="flex flex-col bg-white text-blue-600 lg:h-4/5 h-auto rounded-xl p-8 overflow-hidden">
         <div
           style={{
             height: 500,
-            maxHeight: 700,
+            maxHeight: 500,
             width: "100%",
             color: "#553285",
           }}

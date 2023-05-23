@@ -1,19 +1,19 @@
 //React
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 //React-hook-form
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 //Material-ui
-import { styled, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 
 // Yup
-import * as yup from "yup";
-import { useAppDispatch, useAppSelector } from "../../features/hooks/hooks";
-import { loginClient } from "../../features/client/authSliceClient";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import * as yup from "yup";
+import { loginClient } from "../../features/client/authSliceClient";
+import { useAppDispatch, useAppSelector } from "../../features/hooks/hooks";
 
 interface ErrorObject {
   error: { error: string };
@@ -49,7 +49,6 @@ export function Login() {
   const {
     register,
     handleSubmit: onSubmit,
-    watch,
     formState: { errors },
   } = useForm<IFormInputs>({
     resolver: yupResolver(schema),
@@ -76,47 +75,46 @@ export function Login() {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit(handleSubmit)} className="mt-10">
-        <div className="flex flex-col gap-4 mb-4">
-          <TextField
-            id="outlined-basic"
-            {...register("email")}
-            label="Seu email"
-            variant="outlined"
-            helperText={errors?.email?.message}
-            error={errors?.email ? true : false}
-            className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
-          />
-          <TextField
-            id="outlined-basic"
-            type="password"
-            {...register("password")}
-            label="Informe sua senha"
-            variant="outlined"
-            helperText={errors?.password?.message}
-            error={errors?.password ? true : false}
-            className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
-          />
-
-          {typeof error === 'object' && error !== null && (
-            <p className="mx-auto text-red-500 text-sm font-medium">Email ou senha inválidos</p>
-          )}
-        </div>
+    <div className="w-full">
+      <form
+        onSubmit={onSubmit(handleSubmit)}
+        className="flex flex-col gap-4 mt-4 w-full"
+      >
+        <TextField
+          id="outlined-basic"
+          {...register("email")}
+          label="Seu email"
+          variant="outlined"
+          helperText={errors?.email?.message}
+          error={errors?.email ? true : false}
+          className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
+        />
+        <TextField
+          id="outlined-basic"
+          type="password"
+          {...register("password")}
+          label="Informe sua senha"
+          variant="outlined"
+          helperText={errors?.password?.message}
+          error={errors?.password ? true : false}
+          className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
+        />
+        {typeof error === 'object' && error !== null && (
+          <p className="mx-auto text-red-500 text-sm font-medium">Email ou senha inválidos</p>
+        )}
         <div className="flex justify-between text-sm">
           <div>
             {" "}
             <input
               type="checkbox"
-              id="subscribeNews"
-              name="subscribe"
-              value="newsletter"
+              name="rememberPassword"
+              value="rememberPassword"
             />
-            <label htmlFor="subscribeNews"> Lembrar meu acesso </label>
+            <label htmlFor="subscribeNews" className="text-gray-600"> Lembrar meu acesso </label>
           </div>
           <a
             href="#"
-            className="cursor-pointer font-medium hover:font-semibold transition-all"
+            className="cursor-pointer text-gray-600 font-medium hover:underline transition-all"
           >
             Esqueci minha senha
           </a>
@@ -133,7 +131,7 @@ export function Login() {
           :
           <button
             type="submit"
-            className="flex text-base text-white w-full gap-2 font-medium p-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+            className="flex text-base text-white w-full gap-2 font-bold p-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
           >
             Fazer Login
           </button>
@@ -149,21 +147,11 @@ export function Login() {
         <button
           onClick={handleGuest}
           type="button"
-          className="flex text-base text-white w-full gap-2 font-medium p-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+          className="flex text-base text-white w-full gap-2 font-bold p-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
         >
           Login como Convidado
         </button>
       }
-
-      <span className="pt-4 mx-auto">
-        Já tem conta?
-        <Link
-          to="../cadastro"
-          className="cursor-pointer font-medium hover:font-semibold transition-all ml-2"
-        >
-          Acesse aqui
-        </Link>
-      </span>
-    </>
+    </div>
   );
 }

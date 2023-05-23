@@ -1,14 +1,16 @@
-import React from "react";
 
 import { TextField } from "@mui/material";
 import { ButtonBack } from "../../components/ButtonBack";
+import { useAppSelector } from "../../features/hooks/hooks";
 import { AcessTable } from "./AcessTable";
 
 export const Config = () => {
+  const user = useAppSelector((state) => state.rootReducer.auth.user)
+
   return (
-    <div>
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg text-blue-600 mb-4">
+      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-white shadow-xl rounded-lg text-blue-600 mb-4">
         <div className="flex md:flex-row flex-col items-center justify-between">
           <div className="flex md:flex-row flex-col gap-4 items-center">
             <img
@@ -18,10 +20,10 @@ export const Config = () => {
             />
             <div className="md:text-left text-center">
               <h2 className="text-lg font-semibold mb-2">
-                Nome Completo do Colaborador
+                {user?.name}
               </h2>
               <p className="text-sm mb-2">
-                <strong>Tipo de Perfil: </strong>Administrador
+                <strong>Tipo de Perfil: </strong>{user?.type}
               </p>
             </div>
           </div>
@@ -38,7 +40,7 @@ export const Config = () => {
               id="outlined-basic"
               label="Nome Completo"
               variant="outlined"
-              defaultValue="Nome Completo do Colaborador"
+              defaultValue={user?.name}
             />
 
             <TextField
@@ -146,7 +148,7 @@ export const Config = () => {
             <TextField
               disabled
               label="Email"
-              defaultValue="contato@gmail.com"
+              defaultValue={user?.email}
               variant="outlined"
             />
           </div>

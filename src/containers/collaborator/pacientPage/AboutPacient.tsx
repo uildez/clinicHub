@@ -1,10 +1,9 @@
-import React from "react";
 
 export const AboutPacient = () => {
   return (
     <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
       <div className="flex flex-col justify-between w-full bg-slate-100 shadow-xl rounded-lg text-gray-600 overflow-hidden">
-        <h1 className="text-lg py-4 px-8 bg-slate-200">
+        <h1 className="text-lg py-4 px-8 text-white font-semibold bg-blue-600">
           Nome do Paciente Completo
         </h1>
         <div className="flex flex-col gap-3 py-4 px-8">
@@ -45,7 +44,7 @@ export const AboutPacient = () => {
       </div>
       <div>
         <div className="flex flex-col justify-between w-full bg-slate-100 shadow-xl rounded-lg text-gray-600 mb-4 overflow-hidden">
-          <h1 className="text-lg py-4 px-8 bg-slate-200">Última evolução</h1>
+          <h1 className="text-lg py-4 px-8 text-white font-semibold bg-blue-600">Última evolução</h1>
           <div className="py-4 px-8">
             <p className="flex justify-between">
               <span>Nome da Especialista</span> dd/mm/aaaa
@@ -53,7 +52,7 @@ export const AboutPacient = () => {
           </div>
         </div>
         <div className="flex flex-col w-full h-full max-h-[345px] bg-slate-100 shadow-xl rounded-lg text-gray-600 overflow-hidden">
-          <h1 className="text-lg py-4 px-8 bg-slate-200">Consultas</h1>
+          <h1 className="text-lg py-4 px-8 text-white font-semibold bg-blue-600">Consultas</h1>
           <div className="flex flex-col gap-4 py-4 px-8 text-sm max-h-[265px] overflow-y-scroll">
             <div className="flex justify-between">
               <span>dd/mm/aaaa hh:mm</span>

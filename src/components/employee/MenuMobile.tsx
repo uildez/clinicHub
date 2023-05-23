@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Logored from "../../_assets/images/logo/logo-blue.png";
 import { LinkMenu } from "./LinkMenu";
 
 import { useLocation } from "react-router-dom";
-import { useAppDispatch } from "../../features/hooks/hooks";
 import { logoutAction } from "../../features/auth/authSlice";
+import { useAppDispatch } from "../../features/hooks/hooks";
 
 export const MenuMobile = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -16,41 +16,57 @@ export const MenuMobile = () => {
   }
 
   return (
-    <div className="lg:hidden flex">
-      <i
-        className="fa-solid fa-bars flex items-center justify-center absolute left-4 bg-blue-600 hover:bg-blue-800 p-2 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white lg:!hidden"
-        color="#fff"
-        onClick={() => setToggleMenu(true)}
-      ></i>
+    <>
+      <div className="lg:hidden flex py-4 px-4 w-full items-center justify-start border-b-2 border-[#EFF1F1]">
+        <i
+          className="fa-solid fa-bars flex items-center justify-center left-4 bg-blue-600 hover:bg-blue-800 p-2 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white lg:!hidden"
+          color="#fff"
+          onClick={() => setToggleMenu(true)}
+        ></i>
 
-      <img
-        src={Logored}
-        alt=""
-        className="absolute w-[160px] top-2 right-2/4 translate-x-1/2 mx-auto lg:hidden"
-      />
+        <img
+          src={Logored}
+          alt=""
+          className="w-[160px] mx-auto lg:hidden"
+        />
 
-      <button onClick={handleLogout} className="fa-solid fa-right-from-bracket flex items-center justify-center absolute right-4 bg-blue-600 hover:bg-blue-800 p-2 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white lg:!hidden"></button>
-
+        <div className="relative">
+          <i className="fa-solid fa-bell text-blue-600 text-2xl p-2 rounded-lg cursor-pointer transition-all"></i>
+          <span className="flex items-center justify-center text-xs font-semibold top-0 right-0 border-2 border-white absolute bg-blue-600 text-white w-[20px] h-[20px] rounded-full">0</span>
+        </div>
+      </div>
+      
       <div
-        className={`flex flex-col items-center h-full ${toggleMenu ? "w-3/5 px-4" : "w-[0px]"
-          } bg-slate-100 absolute transition-all ease-in-out lg:hidden z-50 shadow-2xl`}
+        className=
+        {`flex flex-col items-center absolute h-screen pb-8 bg-slate-100
+          transition-all ease-in-out lg:hidden z-50 shadow-2xl
+        ${toggleMenu ? "w-3/5 px-4 left-0" : "-left-60"}`
+        }
       >
         <div className="w-full">
           <i
-            className={`${toggleMenu ? "relative left-0" : "hidden -left-10"
-              } fa-solid fa-xmark flex items-center justify-center relative bg-blue-600 hover:bg-blue-800 py-2 px-3 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white`}
+            className={`${toggleMenu ? "relative left-0" : "hidden -left-20"
+              } fa-solid fa-xmark flex items-center justify-center relative bg-blue-600 hover:bg-blue-800 py-[10px] px-3 rounded-lg cursor-pointer transition-all top-4 text-2xl text-white`}
             color="#fff"
             onClick={() => setToggleMenu(false)}
           ></i>
         </div>
 
         <div
-          className={`${toggleMenu ? "flex" : "hidden"
-            } relative flex-col items-center w-full mt-20 gap-4`}
+          className={`${toggleMenu ? "flex" : "hidden"} relative flex-col items-center w-full mt-20 gap-4`}
         >
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance', 'finance']}
+            routing="dashboard"
+            icon="fa-solid fa-house"
+            title="Dashboard"
+          />
+          <LinkMenu
+            toggleMenu={toggleMenu}
+            location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance']}
             routing="agendamento"
             icon="fa-solid fa-calendar"
             title="Agendamento"
@@ -58,6 +74,7 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance', 'finance']}
             routing="pacientes"
             icon="fa-solid fa-users"
             title="Pacientes"
@@ -65,6 +82,7 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'finance']}
             routing="funcionarios"
             icon="fa-solid fa-people-group"
             title="Colaboradores"
@@ -72,13 +90,15 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
-            routing="servicos-convenio"
+            userTypeAllowed={['admin', 'finance']}
+            routing="convenio"
             icon="fa-solid fa-handshake"
             title="Convênios"
           />
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance']}
             routing="equipamentos"
             icon="fa-solid fa-stethoscope"
             title="Equipamentos"
@@ -86,6 +106,7 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance']}
             routing="servicos"
             icon="fa-solid fa-syringe"
             title="Serviços"
@@ -93,6 +114,7 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance']}
             routing="estoque"
             icon="fa-solid fa-box"
             title="Estoque"
@@ -100,6 +122,7 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance']}
             routing="guias-atendimento"
             icon="fa-solid fa-file-lines"
             title="Guias de Atendimento"
@@ -107,6 +130,7 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'doctor', 'attendance']}
             routing="receituario"
             icon="fa-regular fa-paste"
             title="Receituário"
@@ -114,16 +138,27 @@ export const MenuMobile = () => {
           <LinkMenu
             toggleMenu={toggleMenu}
             location={location.pathname}
+            userTypeAllowed={['admin', 'finance']}
             routing="financeiro"
             icon="fa-solid fa-dollar-sign"
             title="Financeiro"
           />
-          <button className="flex absolute -bottom-40 items-center justify-center py-4 w-full mt-20 gap-4 text-sm px-4 bg-blue-600 rounded-lg cursor-pointer text-white hover:bg-blue-800 transition-all">
+        </div>
+
+        <div className="flex flex-col bottom-10 absolute gap-2">
+          <button className="flex items-center justify-center py-4 w-full gap-4 text-sm px-4 bg-blue-600 rounded-lg cursor-pointer text-white hover:bg-blue-800 transition-all">
             <i className="fa-solid fa-gears"></i>
             Configurações
           </button>
+          <button
+            onClick={handleLogout}
+            className="flex items-center justify-center py-4 w-full gap-4 text-sm px-4 bg-blue-600 rounded-lg cursor-pointer text-white hover:bg-blue-800 transition-all"
+          >
+            <i className="fa-solid fa-arrow-right-from-bracket"></i>
+            Sair
+          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };

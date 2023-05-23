@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
 // React-hook-form
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 // Import's
 import { columnsBudget, rowsBudget } from "../../../_fakeData/DataBudgetPacient";
@@ -12,17 +12,17 @@ import {
 } from "../../../validations/NewBudget";
 
 // Material UI
-import {
-  createTheme,
-  ThemeProvider,
-  Theme,
-  StyledEngineProvider,
-  adaptV4Theme,
-} from "@mui/material/styles";
-import { DataGrid, ptBR } from "@mui/x-data-grid";
+import { MenuItem, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { MenuItem, TextField } from "@mui/material";
+import {
+  StyledEngineProvider,
+  Theme,
+  ThemeProvider,
+  adaptV4Theme,
+  createTheme,
+} from "@mui/material/styles";
+import { DataGrid } from "@mui/x-data-grid";
 import { DatePicker } from "@mui/x-date-pickers";
 
 declare module "@mui/styles/defaultTheme" {
@@ -152,7 +152,7 @@ export const BudgetPacient = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-between w-full p-8 bg-slate-100 shadow-xl rounded-lg text-gray-600 overflow-hidden">
+      <div className="flex flex-col justify-between w-full p-8 bg-white shadow-xl rounded-lg text-gray-600 overflow-hidden">
         <div className="flex w-full justify-between mb-4">
           <button
             onClick={handleOpen}

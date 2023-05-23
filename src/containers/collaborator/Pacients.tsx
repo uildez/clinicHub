@@ -1,14 +1,26 @@
 import { ButtonBack } from "../../components/ButtonBack";
 
 import { DataGrid } from "@mui/x-data-grid";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { columns, rows } from "../../_fakeData/DataPacients";
+import { fetchClients, selectClients } from "../../features/client/fecthClients";
 
 export const Pacients = () => {
+  const dispatch = useDispatch();
+  const clients = useSelector(selectClients);
+
+  useEffect(() => {
+    dispatch(fetchClients());
+  }, [dispatch]);
+
+  console.log(clients)
+
   return (
-    <div className="w-full">
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex lg:flex-row flex-col justify-between w-full py-4 px-8 bg-slate-100 shadow-xl rounded-lg text-blue-600 mb-4 lg:gap-0 gap-4">
+      <div className="flex lg:flex-row flex-col justify-between w-full py-4 px-8 bg-white shadow-xl rounded-lg text-blue-600 mb-4 lg:gap-0 gap-4">
         <div className="flex lg:flex-col items-center flex-row gap-2">
           <h2 className="text-4xl font-bold min-w-[70px]">230</h2>
           <span className="text-lg">Pacientes Atendidos</span>
@@ -38,7 +50,7 @@ export const Pacients = () => {
         </Link>
       </div>
 
-      <div className="flex flex-col bg-slate-100 shadow-xl h-auto rounded-xl p-8">
+      <div className="flex flex-col bg-white shadow-xl h-auto rounded-xl p-8">
         <div
           style={{
             height: 500,

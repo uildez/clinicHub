@@ -1,17 +1,15 @@
-import React from "react";
 import { ButtonBack } from "../../../components/ButtonBack";
 
-import { AboutPacient } from "./AboutPacient";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { LinkMenuPacientPage } from "../../../components/employee/LinkMenuPacientPage";
-import { BudgetPacient } from "./BudgetPacient";
+import { AboutPacient } from "./AboutPacient";
 import { Attendance } from "./Attendance";
-import { TreatmentPacient } from "./TreatmentPacient";
+import { BudgetPacient } from "./BudgetPacient";
 import { DebitPacient } from "./DebitPacient";
+import { TreatmentPacient } from "./TreatmentPacient";
 
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
 import { InfoService } from "./InfoService";
 
 const Menu = () => (
@@ -53,9 +51,9 @@ export const PacientPage = () => {
   const location = useLocation();
 
   return (
-    <div className="w-full">
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg text-gray-600 mb-4">
+      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-white shadow-xl rounded-lg text-gray-600 mb-4">
         <div className="flex md:flex-row flex-col items-center justify-between">
           <div className="flex md:flex-row flex-col gap-4 items-center">
             <img

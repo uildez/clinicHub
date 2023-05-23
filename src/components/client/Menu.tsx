@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { LinkMenu } from "./LinkMenu";
 import Logo from "../../_assets/images/logo/icon-blue.png";
 import { logoutActionClient } from "../../features/client/authSliceClient";
 import { useAppDispatch } from "../../features/hooks/hooks";
+import { LinkMenu } from "./LinkMenu";
 
 export const Menu = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
@@ -90,7 +90,7 @@ export const Menu = () => {
   );
 
   return (
-    <div className="flex lg:flex-col flex-row justify-between items-center fixed z-40 lg:max-w-[80px] w-full lg:h-full h-[30px] bg-slate-200 shadow-xl px-4 py-6 min-h-[20px] top-0">
+    <div className="flex lg:flex-col flex-row justify-between items-center fixed z-40 lg:max-w-[80px] w-full lg:h-full h-[30px] bg-white shadow-xl px-4 py-6 min-h-[20px] top-0">
       <Link to="/" className="lg:hidden block">
         <button
           className="flex cursor-pointer hover:scale-105 hover:shadow-blue-800/50 hover:text-blue-600 transition ease-in-out"
@@ -137,6 +137,7 @@ export const Menu = () => {
           </div>
         )}
       </div>
+      
       {/* Menu Desktop */}
       <div className="lg:flex flex-col gap-8 hidden">
         <Menu />

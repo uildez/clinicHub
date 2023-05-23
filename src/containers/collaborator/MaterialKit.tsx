@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { TextField } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useState } from "react";
 
 const columns: GridColDef[] = [
   {
@@ -109,7 +109,7 @@ export const MaterialKit = () => {
 
   return (
     <div className="border-2 border-gray-300 rounded-lg mt-4 overflow-hidden">
-      <h1 className="text-base font-semibold bg-gray-300 p-4 mb-4">
+      <h1 className="text-base text-white font-semibold bg-blue-600 p-4 mb-4">
         Kit de Materiais
       </h1>
       <form className="w-full">

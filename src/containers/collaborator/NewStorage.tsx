@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../components/ButtonBack";
 
 // React-hook-form
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 //Material-ui
 import { MenuItem, TextField } from "@mui/material";
@@ -14,16 +14,16 @@ import Chip from "@mui/material/Chip";
 
 // Import's
 import {
-  FormInputsNewStorage,
-  schemaNewStorage,
-} from "../../validations/NewStorage";
-import {
   Checkbox,
   Divider,
   FormControlLabel,
   InputAdornment,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import {
+  FormInputsNewStorage,
+  schemaNewStorage,
+} from "../../validations/NewStorage";
 
 //Types Selected's
 const genres = ["Masculino", "Feminino", "Outro", "Não quero declarar"];
@@ -312,9 +312,9 @@ export const NewStorage = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg text-blue-600 mb-4">
+      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-white shadow-xl rounded-lg text-blue-600 mb-4">
         <form onSubmit={onSubmit(handleSubmit)}>
           <h3 className="text-lg text-blue-600 font-bold mb-4">
             Cadastro de Novo Produto

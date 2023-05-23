@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const columns: GridColDef[] = [
   {
-    field: "pacientName",
+    field: "name",
     headerClassName: "header",
     headerName: "Paciente",
     width: 200,
@@ -15,21 +15,13 @@ export const columns: GridColDef[] = [
     width: 190,
   },
   {
-    field: "age",
-    headerClassName: "header",
-    headerName: "Idade",
-    type: "number",
-    width: 120,
-    align: "left",
-    headerAlign: "left",
-  },
-  {
     field: "date",
     headerClassName: "header",
-    headerName: "Último Atendimento",
+    headerName: "Nascimento",
     width: 190,
     align: "left",
     type: "dateTime",
+    valueGetter: (params) => new Date(params.value),
   },
   {
     field: "insurance",
@@ -92,6 +84,8 @@ export const columns: GridColDef[] = [
     },
   },
 ];
+
+
 
 export const rows = [
   {

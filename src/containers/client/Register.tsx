@@ -1,25 +1,23 @@
 //React
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { ButtonBack } from "../../components/ButtonBack";
-import img from "../../_assets/images/img-login.png";
 
 //React-hook-form
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 //Material-ui
 import { TextField } from "@mui/material";
 
 // Yup
-import * as yup from "yup";
 import { DatePicker } from "@mui/x-date-pickers";
-import { useAppDispatch } from "../../features/hooks/hooks";
-import { registerClient } from "../../features/client/registerClient";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import * as yup from "yup";
+import { registerClient } from "../../features/client/registerClient";
+import { useAppDispatch } from "../../features/hooks/hooks";
 
-import { parse, format, formatISO } from 'date-fns';
+import { formatISO } from 'date-fns';
 
 interface IFormInputs {
   name: string;
@@ -88,133 +86,108 @@ export function Register() {
   };
 
   return (
-    <>
-      <ButtonBack />
-      <div className="flex lg:flex-row flex-col h-4/5 rounded-xl overflow-hidden">
-        <div className="flex flex-col h-full lg:w-3/5 w-full bg-slate-200 text-blue-600 rounded-xl lg:px-8 lg:py-8 py-8 px-6">
-          <i className="fa-solid fa-bolt text-3xl font-bold mb-4"></i>
-          <h2 className="text-3xl font-bold">Cadastro</h2>
-          <div className="flex flex-col justify-between w-full">
-            <form onSubmit={onSubmit(handleSubmit)} className="mt-8">
-              <div className="flex flex-col overflow-y-scroll gap-4 max-h-[180px]">
+    <div className="flex flex-col justify-between w-full">
+      <form onSubmit={onSubmit(handleSubmit)} className="mt-8">
+        <div className="flex flex-col overflow-y-scroll gap-4 max-h-[180px]">
+          <TextField
+            id="outlined-basic"
+            {...register("name")}
+            label="Nome Completo"
+            variant="outlined"
+            helperText={errors?.name?.message}
+            error={errors?.name ? true : false}
+            className="w-full"
+          />
+
+          <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
+            <DatePicker
+              label="Data de Nascimento"
+              renderInput={(params: any) => (
                 <TextField
-                  id="outlined-basic"
-                  {...register("name")}
-                  label="Nome Completo"
-                  variant="outlined"
-                  helperText={errors?.name?.message}
-                  error={errors?.name ? true : false}
-                  className="w-full"
+                  {...params}
+                  {...register("date")}
+                  type="date"
+                  helperText={errors?.date?.message}
+                  error={errors?.date ? true : false}
                 />
+              )}
+              value={selectedDate}
+              onChange={(newValue: any) => {
+                const formattedDate = formatISO(newValue, { representation: 'complete' });
+                setSelectedDate(formattedDate);
+              }}
+            />
 
-                <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
-                  <DatePicker
-                    label="Data de Nascimento"
-                    renderInput={(params: any) => (
-                      <TextField
-                        {...params}
-                        {...register("date")}
-                        type="date"
-                        helperText={errors?.date?.message}
-                        error={errors?.date ? true : false}
-                      />
-                    )}
-                    value={selectedDate}
-                    onChange={(newValue: any) => {
-                      const formattedDate = formatISO(newValue, { representation: 'complete' });
-                      setSelectedDate(formattedDate);
-                    }}
-                  />
-
-                  <TextField
-                    {...register("phone")}
-                    label="Celular"
-                    variant="outlined"
-                    helperText={errors?.phone?.message}
-                    error={errors?.phone ? true : false}
-                  />
-                </div>
-
-                <TextField
-                  {...register("cpf")}
-                  label="Digite seu CPF"
-                  variant="outlined"
-                  helperText={errors?.cpf?.message}
-                  error={errors?.cpf ? true : false}
-                />
-
-                <TextField
-                  {...register("email")}
-                  label="Email"
-                  variant="outlined"
-                  helperText={errors?.email?.message}
-                  error={errors?.email ? true : false}
-                />
-
-                <TextField
-                  id="outlined-basic"
-                  type="password"
-                  {...register("password")}
-                  label="Informe sua senha"
-                  variant="outlined"
-                  helperText={errors?.password?.message}
-                  error={errors?.password ? true : false}
-                  className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
-                />
-              </div>
-              <div className="flex justify-between mt-4 text-sm">
-                <div>
-                  {" "}
-                  <input
-                    type="checkbox"
-                    id="subscribeNews"
-                    name="subscribe"
-                    value="newsletter"
-                  />
-                  <label htmlFor="subscribeNews"> Lembrar meu acesso </label>
-                </div>
-                <a
-                  href="#"
-                  className="cursor-pointer font-medium hover:font-semibold transition-all"
-                >
-                  Esqueci minha senha
-                </a>
-              </div>
-              <div className="flex lg:flex-row flex-col w-full justify-end">
-                {isLoading === 1 ?
-                  <button
-                    className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 min-w-[121px] min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-                  >
-                    <AiOutlineLoading3Quarters className="animate-spin" />
-                  </button> :
-                  <button
-                    type="submit"
-                    className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
-                  >
-                    Criar conta
-                  </button>
-                }
-              </div>
-            </form>
-            <span className="pt-4 mx-auto">
-              Já tem conta?
-              <Link
-                to="../entrar"
-                className="cursor-pointer font-medium hover:font-semibold transition-all ml-2"
-              >
-                Acesse aqui
-              </Link>
-            </span>
+            <TextField
+              {...register("phone")}
+              label="Celular"
+              variant="outlined"
+              helperText={errors?.phone?.message}
+              error={errors?.phone ? true : false}
+            />
           </div>
-        </div>
-        <div className="lg:block hidden lg:w-3/5 w-full overflow-hidden">
-          <img
-            className="absolute h-[550px] overflow-hidden bottom-0 right-40"
-            src={img}
-            alt="Doutor com Paciente"
+
+          <TextField
+            {...register("cpf")}
+            label="Digite seu CPF"
+            variant="outlined"
+            helperText={errors?.cpf?.message}
+            error={errors?.cpf ? true : false}
+          />
+
+          <TextField
+            {...register("email")}
+            label="Email"
+            variant="outlined"
+            helperText={errors?.email?.message}
+            error={errors?.email ? true : false}
+          />
+
+          <TextField
+            id="outlined-basic"
+            type="password"
+            {...register("password")}
+            label="Informe sua senha"
+            variant="outlined"
+            helperText={errors?.password?.message}
+            error={errors?.password ? true : false}
+            className="text-gray-900 text-sm rounded-lg  outline-none focus:outline-blue-500 focus:ring-0 focus:outline focus:outline-2 focus:outline-offset-2 block w-full p-2.5"
           />
         </div>
-      </div>
-    </>
+        <div className="flex justify-between mt-4 text-sm">
+          <div>
+            {" "}
+            <input
+              type="checkbox"
+              id="subscribeNews"
+              name="subscribe"
+              value="newsletter"
+            />
+            <label htmlFor="subscribeNews" className="text-gray-600"> Lembrar meu acesso </label>
+          </div>
+          <a
+            href="#"
+            className="text-gray-600 cursor-pointer font-medium hover:underline transition-all"
+          >
+            Esqueci minha senha
+          </a>
+        </div>
+        <div className="flex lg:flex-row flex-col w-full justify-end">
+          {isLoading === 1 ?
+            <button
+              className="flex text-base text-white w-fit px-4 gap-2 font-medium py-2 mt-4 min-w-[121px] min-h-[40px] bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+            >
+              <AiOutlineLoading3Quarters className="animate-spin" />
+            </button> :
+            <button
+              type="submit"
+              className="flex text-base text-white w-full px-4 gap-2 font-medium py-2 mt-4 bg-blue-600 cursor-pointer items-center justify-center rounded-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out"
+            >
+              Criar conta
+            </button>
+          }
+        </div>
+      </form>
+    </div>
   );
 }

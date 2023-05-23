@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { MenuItem, TextField } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { useState } from "react";
 
 const hiredOptions = [
   "CLINFEC",
@@ -173,7 +173,7 @@ export const AgreementContracts = () => {
 
   return (
     <div className="border-2 border-gray-300 rounded-lg mt-4 overflow-hidden">
-      <h1 className="text-base font-semibold bg-gray-300 p-4 mb-4">
+      <h1 className="text-base font-semibold text-white bg-blue-600 p-4 mb-4">
         Contratos do Convênio
       </h1>
       <form className="w-full">

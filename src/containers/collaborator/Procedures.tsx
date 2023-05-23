@@ -1,15 +1,14 @@
-import React from "react";
 import { useState } from "react";
 
-import { DataGrid, GridColDef, GridToolbar, ptBR } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import { ButtonBack } from "../../components/ButtonBack";
 
 import {
-  createTheme,
-  ThemeProvider,
-  Theme,
   StyledEngineProvider,
+  Theme,
+  ThemeProvider,
   adaptV4Theme,
+  createTheme,
 } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { rowsInsurance } from "../../_fakeData/DataInsurance";
@@ -86,10 +85,10 @@ export const Procedures = () => {
   const [insurance, setInsurance] = useState<any[]>([]);
 
   return (
-    <>
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
 
-      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg mb-4">
+      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-white shadow-xl rounded-lg mb-4">
         <div className="flex w-full justify-between mb-4">
           <Link
             to="/portaldocolaborador/servicos/novo-servico"
@@ -116,6 +115,6 @@ export const Procedures = () => {
           </ThemeProvider>
         </StyledEngineProvider>
       </div>
-    </>
+    </div>
   );
 };

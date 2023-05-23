@@ -4,19 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../components/ButtonBack";
 
 // React-hook-form
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
 //Material-ui
 import { Box, MenuItem, TextField } from "@mui/material";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Stack } from "@mui/system";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-import { InsurancePacient } from "./InsurancePacient";
 import {
   FormInputsNewPacient,
   schemaNewPacient,
 } from "../../validations/NewPacientValidation";
+import { InsurancePacient } from "./InsurancePacient";
 
 //Types Selected's
 const genres = ["Masculino", "Feminino", "Outro", "Não quero declarar"];
@@ -159,9 +159,9 @@ export const NewPacient = () => {
   };
 
   return (
-    <div className="w-full">
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-slate-100 shadow-xl rounded-lg text-blue-600 mb-4">
+      <div className="flex flex-col justify-between w-full pt-8 pb-4 px-8 bg-white shadow-xl rounded-lg text-blue-600 mb-4">
         <form onSubmit={onSubmit(handleSubmit)}>
           <h3 className="text-lg text-blue-600 font-bold mb-8">
             Dados Pessoais e Dados Médicos
@@ -170,7 +170,7 @@ export const NewPacient = () => {
             <div className="flex flex-col">
               <img
                 src={preview}
-                className="bg-[url('https://cdn-icons-png.flaticon.com/512/149/149071.png')] bg-cover md:w-[150px] w-full md:h-[150px] h-[300px] rounded-lg overflow-hidden bg-cover bg-center"
+                className="bg-[url('https://cdn-icons-png.flaticon.com/512/149/149071.png')] bg-cover md:w-[150px] w-full md:h-[150px] h-[300px] rounded-lg overflow-hidden bg-center"
               />
               <label className="flex flex-col text-base text-white w-full gap-2 font-medium py-1 bg-blue-600 cursor-pointer items-center justify-center rounded-br-lg rounded-bl-lg shadow-lg hover:scale-105 hover:shadow-blue-500/50 transition duration-[500ms] ease-in-out">
                 Selecione a foto

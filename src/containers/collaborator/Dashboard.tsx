@@ -1,72 +1,113 @@
-import { Routes, Route } from "react-router-dom";
-import { Menu } from "../../components/employee/Menu";
-import { Navbar } from "./Navbar";
-import { motion } from "framer-motion";
-import { Employees } from "./Employees";
-import { MenuMobile } from "../../components/employee/MenuMobile";
-import { Pacients } from "./Pacients";
-import { Insurance } from "./Insurance";
-import { Storage } from "./Storage";
-import { Schedule } from "./Schedule";
-import { NewEmployeer } from "./NewEmployeer";
-import { NewPacient } from "./NewPacient";
-import { Equip } from "./Equip";
-import { NewUser } from "./NewUser";
-import { PacientPage } from "./pacientPage/PacientPage";
-import { NewInsurance } from "./NewInsurance";
-import { Procedures } from "./Procedures";
-import { NewProcedure } from "./NewProcedure";
-import { NewStorage } from "./NewStorage";
-import { Config } from "./Config";
-import { useAppSelector } from "../../features/hooks/hooks";
+import { AiFillBuild } from "react-icons/ai"
+import { Link } from "react-router-dom"
 
 export const Dashboard = () => {
-  const user = useAppSelector((state) => state.rootReducer.auth.user)
-
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ delay: 0.5 }}
-    >
-      <div className="flex bg-blue-200 h-full w-screen">
-        <Menu />
-        <MenuMobile />
-        <div className="flex flex-col bg-slate-200 w-screen min-h-screen overflow-hidden lg:py-4 lg:px-8 p-4 pt-20">
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Schedule />} />
-            <Route path="agendamento" element={<Schedule />} />
-            <Route path="pacientes" element={<Pacients />} />
-            <Route path="pacientes/novo-paciente/*" element={<NewPacient />} />
-            <Route
-              path="pacientes/pagina-paciente/*"
-              element={<PacientPage />}
-            />
-            <Route path="funcionarios" element={<Employees />} />
-            <Route
-              path="funcionarios/novo-funcionario"
-              element={<NewEmployeer />}
-            />
-            <Route path="funcionarios/novo-usuario" element={<NewUser />} />
-            <Route path="servicos-convenio" element={<Insurance />} />
-            <Route
-              path="servicos-convenio/novo-convenio"
-              element={<NewInsurance />}
-            />
-            <Route path="equipamentos" element={<Equip />} />
-            <Route path="servicos" element={<Procedures />} />
-            <Route path="servicos/novo-servico" element={<NewProcedure />} />
-            <Route path="estoque" element={<Storage />} />
-            <Route path="estoque/novo-produto" element={<NewStorage />} />
-            <Route path="guias-atendimento" element={<></>} />
-            <Route path="receituario" element={<></>} />
-            <Route path="financeiro" element={<></>} />
-            <Route path="meu-perfil" element={<Config />} />
-          </Routes>
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
+      <div className="grid container h-full w-full gap-4">
+        
+        <div className="section1 flex flex-col justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <div className="flex flex-col">
+            <span className="text-base text-gray-600 font-semibold">Pacientes do dia</span>
+            <h2 className="lg:text-6xl text-3xl text-blue-600 font-bold">29</h2>
+          </div>
+          <Link to="/portaldocolaborador/pacientes" className="text-base text-gray-600 border-blue-600 hover:pl-2 hover:border-l-4 transition-all">Ver pacientes</Link>
+        </div>
+
+        <div className="section2 flex flex-col justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-blue-600">
+          <div className="flex flex-col">
+            <span className="text-base text-white font-semibold">Estoque</span>
+            <h2 className="flex items-end lg:text-6xl text-3xl text-white font-bold">121 <p className="text-sm font-medium mb-1 ml-2">itens</p></h2>
+          </div>
+          <Link to="/portaldocolaborador/estoque" className="text-base text-white border-white hover:pl-2 hover:border-l-4 transition-all">Abrir estoque</Link>
+        </div>
+
+        <div className="section3 flex flex-col justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-[#0069A2]">
+          <div className="flex flex-col">
+            <div className="flex lg:flex-row flex-col lg:items-center justify-between">
+              <span className="text-base text-white font-semibold">Atendimentos</span>
+              <div className="lg:flex hidden gap-2">
+                <i onClick={() => { }} className="fa-solid fa-circle-arrow-left text-white hover:ring-2 hover:ring-white rounded-full transition-all cursor-pointer"></i>
+                <i onClick={() => { }} className="fa-solid fa-circle-arrow-right text-white hover:ring-2 hover:ring-white rounded-full transition-all cursor-pointer"></i>
+              </div>
+            </div>
+            <h2 className="flex items-end lg:text-6xl text-3xl text-white font-bold">12 <p className="text-sm font-medium mb-1 ml-2">cardiologista</p></h2>
+            <div className="lg:hidden flex gap-2">
+              <i onClick={() => { }} className="fa-solid fa-circle-arrow-left text-white hover:ring-2 hover:ring-white rounded-full transition-all cursor-pointer"></i>
+              <i onClick={() => { }} className="fa-solid fa-circle-arrow-right text-white hover:ring-2 hover:ring-white rounded-full transition-all cursor-pointer"></i>
+            </div>
+          </div>
+          <Link to="/portaldocolaborador/estoque" className="text-base text-white border-white hover:pl-2 hover:border-l-4 transition-all">Abrir atendimentos</Link>
+        </div>
+
+        <div className="section4 flex flex-col justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-[#004F7A]">
+          <div className="flex flex-col">
+            <span className="text-base text-white font-semibold">Agendamentos</span>
+            <h2 className="flex items-end lg:text-6xl text-3xl text-white font-bold">98</h2>
+          </div>
+          <Link to="/portaldocolaborador/agendamento" className="text-base text-white border-white hover:pl-2 hover:border-l-4 transition-all">Fazer novo agendamento</Link>
+        </div>
+
+        <div className="section5 flex flex-col lg:text-left text-center text-blue-600 justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm lg:text-xl font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section6 flex flex-col lg:text-left text-center text-blue-600 justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm lg:text-xl font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section7 flex flex-col lg:text-left text-center text-blue-600 justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section8 flex flex-col lg:text-left text-center text-blue-600 justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section9 flex flex-col lg:text-left text-center text-blue-600 justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section10 flex flex-col lg:text-left text-center text-white justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-blue-600">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section11 flex flex-col lg:text-left text-center text-white justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-blue-600">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section12 flex flex-col lg:text-left text-center text-white justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-blue-600">
+          <AiFillBuild className="text-5xl lg:mx-0 mx-auto" />
+          <h2 className="text-sm font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section13 flex flex-col lg:text-left text-center text-blue-600 justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <AiFillBuild className="text-2xl" />
+          <h2 className="text-sm lg:text-xl font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
+        </div>
+
+        <div className="section14 flex flex-col lg:text-left text-center text-blue-600 justify-between py-6 px-5 gap-4 rounded-lg shadow-md bg-white">
+          <AiFillBuild className="text-2xl" />
+          <h2 className="text-sm lg:text-xl font-semibold">Em Desenvolvimento</h2>
+          <p className="text-base">Volte em breve</p>
         </div>
       </div>
-    </motion.div>
-  );
-};
+    </div>
+  )
+}

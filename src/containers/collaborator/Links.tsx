@@ -1,4 +1,3 @@
-import React from "react";
 import { LinkMenu } from "../../components/employee/LinkMenu";
 
 export const Links = ({ toggleMenu }: any) => {
@@ -28,7 +27,7 @@ export const Links = ({ toggleMenu }: any) => {
       <LinkMenu
         toggleMenu={toggleMenu}
         location={location.pathname}
-        routing="servicos-convenio"
+        routing="convenio"
         icon="fa-solid fa-handshake"
         title="Serviços"
       />

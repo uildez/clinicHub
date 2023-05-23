@@ -8,5 +8,5 @@ interface PrivateRoutesProps {
 export const PrivateRouteClient = ({ children }: PrivateRoutesProps) => {
     const client = useAppSelector((state) => state.rootReducer.authClient.client)
 
-    return client ? children : <Navigate to='/portaldopaciente/entrar' replace={true} />
+    return client ? children : <Navigate to='/' replace={true} />
 }

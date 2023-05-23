@@ -1,26 +1,33 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+import { Link } from "react-router-dom";
 
 // Import's
+import { columns } from "../../_fakeData/DataPacients";
 import { ButtonBack } from "../../components/ButtonBack";
 import { CalendarModel } from "../../components/employee/CalendarModel";
-import { columns, rows } from "../../_fakeData/DataPacients";
 
 //Material-UI
-import { DataGrid } from "@mui/x-data-grid";
 import { Box, MenuItem, TextField } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import axios from "axios";
 import { filterOptions } from "../../_fakeData/DataCalendar";
 
-interface EventProps {
-  title: string;
-  allDay: boolean;
-  start: Date;
-  end: Date;
+interface PacientsTypes {
+  _id: string,
+  name: string,
+  email: string,
+  date: Date,
+  phone: string,
+  cpf: string,
+  createdAt: string,
+  __v: number
+
 }
 
 export const Schedule = () => {
   const [filter, setFilter] = useState("");
+  const [pacients, setPacients] = useState<PacientsTypes[]>([]);
 
   //Handle Filter
   const handleFilter = (event: any) => {
@@ -28,10 +35,22 @@ export const Schedule = () => {
     setFilter(event.target.value as string);
   };
 
+  useEffect(() => {
+    axios.get('https://backend-clinic-hub.vercel.app/authClients/clients')
+      .then(response => {
+        setPacients(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(pacients)
+
   return (
-    <div className="w-full">
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
-      <div className="flex lg:flex-row flex-col justify-between lg:h-[400px] h-[700px] p-8 bg-slate-100 shadow-xl rounded-lg text-blue-600 mb-4 gap-8">
+      <div className="flex lg:flex-row flex-col justify-between lg:h-[400px] h-[700px] p-8 bg-white shadow-xl rounded-lg text-blue-600 mb-4 gap-8">
         <div className="lg:w-[30%] w-full">
           <h2 className="text-xl font-semibold mb-2">Filtros</h2>
           <Box>
@@ -85,7 +104,7 @@ export const Schedule = () => {
         </Link> */}
       </div>
 
-      <div className="flex flex-col bg-slate-100 shadow-xl h-auto rounded-xl p-8">
+      <div className="flex flex-col bg-white shadow-xl h-auto rounded-xl p-8">
         <div
           style={{
             height: 500,
@@ -95,11 +114,12 @@ export const Schedule = () => {
           }}
         >
           <span className="text-gray-600">
-            Foram encontrados <strong>{rows.length}</strong> pacientes
+            Foram encontrados <strong>{pacients.length}</strong> pacientes
           </span>
           <DataGrid
-            rows={rows}
+            rows={pacients}
             columns={columns}
+            getRowId={(row) => row?._id}
             pagination={true}
             autoHeight={true}
             pageSizeOptions={[7]}

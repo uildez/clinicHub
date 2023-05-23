@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import { ButtonBack } from "../../components/ButtonBack";
@@ -61,6 +60,7 @@ export const Employees = () => {
       width: 220,
       align: "left",
       type: "dateTime",
+      valueGetter: (params) => new Date(params.value),
     },
     {
       field: "area",
@@ -68,6 +68,7 @@ export const Employees = () => {
       width: 220,
       align: "left",
       type: "dateTime",
+      valueGetter: (params) => new Date(params.value),
     },
     {
       field: "status",
@@ -191,10 +192,10 @@ export const Employees = () => {
   ];
 
   return (
-    <div>
+    <div className="lg:px-8 px-4 py-4 bg-slate-100">
       <ButtonBack />
 
-      <div className="flex lg:flex-row flex-col items-center justify-between w-full py-4 px-8 bg-slate-100 shadow-xl rounded-lg text-blue-600 mb-4 lg:gap-0 gap-4">
+      <div className="flex lg:flex-row flex-col items-center justify-between w-full py-4 px-8 bg-white shadow-xl rounded-lg text-blue-600 mb-4 lg:gap-0 gap-4">
         <div className="flex lg:flex-col items-center flex-row gap-2">
           <h2 className="text-6xl font-bold min-w-[70px]">87</h2>
           <span className="text-xl text-center">
@@ -242,7 +243,7 @@ export const Employees = () => {
         </Link>
       </div>
 
-      <div className="flex flex-col bg-slate-100 h-auto rounded-xl p-8">
+      <div className="flex flex-col bg-white h-auto rounded-xl p-8">
         <div
           style={{
             height: 500,
