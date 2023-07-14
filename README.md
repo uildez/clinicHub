@@ -30,5 +30,5 @@ Durante o desenvolvimento desse projeto, adquiri diversos aprendizados significa
 - [Tsx](https://www.npmjs.com/package/tsx)
 - [MongoDB](https://www.mongodb.com)
 - [Mongoose](https://mongoosejs.com)
-- [YUP]([https://zod.dev](https://github.com/jquense/yup))
+- [YUP](https://github.com/jquense/yup)
 - [TailwindCSS](https://tailwindcss.com/docs/guides/vite)
